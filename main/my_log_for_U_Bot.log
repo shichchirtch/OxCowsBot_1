@@ -1,0 +1,7 @@
+[2024-03-30 02:08:16,262] #INFO     comand_handlers.py:25 - STD_out - BOT запущен message = Ivan  time 1441985.312
+[2024-03-30 02:08:18,325] #INFO     game_handlers_copy.py:33 - STD_out - set_user_set works
+[2024-03-30 02:08:19,894] #INFO     game_handlers_copy.py:62 - STD_out - Юзер Ivan играет 1 игру
+[2024-03-30 02:08:19,894] #INFO     game_handlers_copy.py:66 - STD_out - BOTs COMBO  =  ['0', '9', '8', '5'] 
+[2024-03-30 02:08:24,367] #INFO     game_handlers_copy.py:219 - STD_out - 
+ ********  Ivan, gaming! ********
+[2024-03-30 02:08:24,367] #INFO     game_handlers_copy.py:222 - STD_out - Ivan temp_res = ['Ox']
