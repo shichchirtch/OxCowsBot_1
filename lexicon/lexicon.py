@@ -2,7 +2,8 @@ sticker_dict = {'process_cancel_command': 'CAACAgIAAxkBAAEEWGVmBURfPi0uMEx284kly
                                           'negative answer':'CAACAgIAAxkBAAEEXANmBfwlbMwU8jN-9Dj3KDdmv9om_wACGAMAApzW5wq3XwyYm4vFvjQE',
                                         'win 4 bools':'CAACAgIAAxkBAAEEXB1mBgjqPpXFf7EzEFOISlkgVpYcxAACGgMAApzW5wqlfyp90X0oAjQE',
                                                 'silly bot':'CAACAgIAAxkBAAEEYf5mB09Q0Qup4Z7uZjY7Q7bJnSNSdAACIQMAApzW5wofM3WHdLVAUzQE',
-                                        'rocket bull':'CAACAgIAAxkBAAEEYfpmB08-hfM94jjkGJ00uFhWuMPM1AACFwMAApzW5wrW9EirtTiB2TQE'
+                                        'rocket bull':'CAACAgIAAxkBAAEEYfpmB08-hfM94jjkGJ00uFhWuMPM1AACFwMAApzW5wrW9EirtTiB2TQE',
+                                        'BOT WINS' :'CAACAgIAAxkBAAEEYfpmB08-hfM94jjkGJ00uFhWuMPM1AACFwMAApzW5wrW9EirtTiB2TQE'
                 }
 positiv_answer = ['да', 'давай', 'сыграем', 'игра', 'yes', 'es', 'нуы',
                   'играть', 'хочу играть', 'OK', 'ok', 'хочу', 'lfdfq',

@@ -15,7 +15,8 @@ start_clava_3 = KeyboardButton(text='Нет, спасибо\nЯ просто п�
 
 start_clava =  ReplyKeyboardMarkup(
     keyboard=[[start_clava_2],[start_clava_1,start_clava_3]],
-    resize_keyboard=True)
+    resize_keyboard=True,
+    input_field_placeholder='SOLO default')
 
 #  Создаю клавиатуру на согласие играть
 keyboard_yes_no = ReplyKeyboardMarkup(
@@ -39,5 +40,18 @@ keyboard_after_saying_NO = ReplyKeyboardMarkup(
 keyboard_after_finish = ReplyKeyboardMarkup(
     keyboard=[[start_button_1, start_clava_2 ],
               [start_button_2]],
-    resize_keyboard=True
+    resize_keyboard=True)
+
+keyboard_digit_buttons = [KeyboardButton(text=f'{i}')for i in range(0, 10)]
+
+keyboard_digits = ReplyKeyboardMarkup(
+    keyboard=[keyboard_digit_buttons],
+    resize_keyboard=True,
+    input_field_placeholder='Жми на кнопки с цифрами !'
 )
+
+
+
+
+
+

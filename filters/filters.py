@@ -71,3 +71,5 @@ class BOT_USER_GAMING(BaseFilter):
         return False
 
 
+filter_list_for_game_handlers = (SET_USER_SET, BOT_COMB, DATA_IS_NOT_DIGIT, GAME_STATUS_FALSE,
+                             DATA_IS_DIGIT, GAME_WITH_BOT, SOLO_GAME_PROCESS, BOT_USER_GAMING)

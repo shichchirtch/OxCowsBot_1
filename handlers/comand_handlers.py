@@ -3,17 +3,15 @@ from aiogram import F
 from aiogram.filters import Command, CommandStart
 from filters.filters import RESTART, SET_USER_SET
 from aiogram import Router
-from lexicon.lexicon import *
-from config.config import takers, personal_dict
-from logger.loggers import std_out_logger, std_err_logger
+from lexicon import *
+from config import takers, personal_dict
+from logger import std_out_logger
 from aiogram.types import Message
-from keyboards.keyboards import keyboard_game_level, start_clava, keyboard_yes_no
+from keyboards import start_clava, keyboard_game_level
 from copy import deepcopy
-from external_functions.external_funktions import time_counter
+from external_functions import time_counter
 
 # Инициализируем роутер уровня модуля
-
-
 Comand_router = Router()
 
 @Comand_router.message(CommandStart(), RESTART())

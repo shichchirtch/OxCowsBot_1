@@ -1,20 +1,16 @@
 import time
 from aiogram.types import ContentType
 from aiogram import Router, F
-from lexicon.lexicon import *
-from filters.filters import (SET_USER_SET, BOT_COMB, DATA_IS_NOT_DIGIT, GAME_STATUS_FALSE,
+from lexicon import *
+from filters import (SET_USER_SET, BOT_COMB, DATA_IS_NOT_DIGIT, GAME_STATUS_FALSE,
                              DATA_IS_DIGIT, GAME_WITH_BOT, SOLO_GAME_PROCESS, BOT_USER_GAMING)
-from external_functions.external_funktions import (get_secret_kit, verify_bools_position,
-                                                   seek_bools, reset_user_dict_after_finish, verify_last_data,
-                                                   verify_last_cow, verify_when_two_cows,
-                                                   find_one_cow_in_6_numbers, user_attempt_guess_botCombo)
-from config.config import takers, level_kit, tallys_str_bot, Four_bools
-from logger.loggers import logger, std_out_logger, std_err_logger
+from external_functions import *
+from config import takers, tallys_str_bot, Four_bools
+from logger import logger, std_out_logger, std_err_logger
 from aiogram.types import Message, ReplyKeyboardRemove
-from keyboards.keyboards import start_clava, keyboard_yes_no, keyboard_after_saying_NO, keyboard_after_finish
+from keyboards import * #start_clava, keyboard_yes_no, keyboard_after_saying_NO, keyboard_after_finish
 
 Game_router = Router()
-
 
 @Game_router.message(F.content_type != ContentType.TEXT)
 async def process_notTEXT_answers(message: Message):
@@ -110,7 +106,12 @@ async def set_user_combo(message: Message):
 
     user_combo = list(message.text)
     takers[message.from_user.id]["user_comb"] = user_combo
-    await message.answer(language_dict['after_user_zagadal_combo'][takers[message.from_user.id]['language']])
+    # for x in 'abcd':
+    #     test_data = message.answer(text='Enter data',
+    #                      reply_markup=keyboard_digits)
+    #     print('test_data = ', test_data)
+    await message.answer(text=language_dict['after_user_zagadal_combo'][takers[message.from_user.id]['language']],
+                         reply_markup=keyboard_digits)
 
     final_res = takers[message.from_user.id]["bot_list"]  # сюда будем аппендить все комбинации ответов бота
     std_out_logger.info(f'\n ********  {takers[message.from_user.id]["user_name"]}, gaming with BOT! ********')
@@ -199,17 +200,8 @@ async def set_user_combo(message: Message):
     print('reversw попыток бота', final_res, 'att = ', len(final_res))
     if takers[message.from_user.id]["game_level"] == "WITH SMART BOT":
         if len(final_res) > 6:
-            part_1, part_2 = final_res[:4], final_res[4:]
-            temp_part = []
-            for k, x in enumerate(part_2):
-                if k//2 == 0:
-                    temp_part.append(x)
-            if len(temp_part) > 6:
-                temp_part = temp_part[:6]
-            final_res = part_1+temp_part
-
+            takers[message.from_user.id]["bot_list"] = final_res[0] + final_res[1:-1:2]
             std_err_logger.info(f'cutting_fin_res =  {final_res}')
-        takers[message.from_user.id]["bot_list"] = final_res
     else:
         takers[message.from_user.id]["bot_list"] = final_res
 
@@ -298,7 +290,10 @@ async def gaming_with_bot(message: Message):
                           f"Сыграем ещё ?")
         takers[message.from_user.id]['bot_pobeda'] += 1
 
-        await message.answer(text=bot_win_stroka,
+        await message.answer(text=bot_win_stroka)
+        await message.answer_sticker(sticker_dict['BOT WINS'])
+        time.sleep(1)
+        await message.answer(text=f"Сыграем ещё ?",
                              reply_markup=keyboard_after_finish)
         reset_user_dict_after_finish(takers, userID)
 
