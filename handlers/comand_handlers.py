@@ -1,18 +1,20 @@
 import time
 from aiogram import F
 from aiogram.filters import Command, CommandStart
-from filters.filters import RESTART, SET_USER_SET
+from filters import RESTART, PRE_START
 from aiogram import Router
 from lexicon import *
 from config import takers, personal_dict
 from logger import std_out_logger
 from aiogram.types import Message
-from keyboards import start_clava, keyboard_game_level
+from keyboards import start_clava, keyboard_game_level, pre_start_clava
 from copy import deepcopy
 from external_functions import time_counter
 
 # Инициализируем роутер уровня модуля
 Comand_router = Router()
+
+
 
 @Comand_router.message(CommandStart(), RESTART())
 async def process_start_command(message: Message):
@@ -29,7 +31,10 @@ async def process_start_command(message: Message):
     takers[message.from_user.id]['start_time'] = start_time
 
     time.sleep(1)
-
+@Comand_router.message(PRE_START())
+async def before_start(message:Message):
+    await message.answer(text='Нажми на кнопу старт !',
+                         reply_markup=pre_start_clava)
 @Comand_router.message(F.text.lower().in_(('rus', 'eng', 'de')))
 async def set_language(message: Message):
     print('смена языка')
@@ -73,13 +78,17 @@ async def process_cancel_command(message: Message):
             takers[message.from_user.id]['game_list'] = []
             takers[message.from_user.id]['game_level'] = 'SOLO'
             takers[message.from_user.id]['secret_kit'] = 'no_data'
+            takers[message.from_user.id]['schritt'] = 0
+            takers[message.from_user.id]['user_comb'] = 'setting_data'
+            takers[message.from_user.id]['bot_kit'] = 'empty'
+            takers[message.from_user.id]['set_SET'] = 'NotSet'
             await message.answer(
                 language_dict['exit from game'][takers[message.from_user.id]['language']])
             await message.answer_sticker(sticker_dict['process_cancel_command'],
                                          reply_markup=start_clava)
         else:
             await message.answer(text=language_dict['user not in game now'][takers[message.from_user.id]['language']])
-                                 #reply_markup=keyboard1)
+
     else:
         await message.answer(language_dict['if not start'][takers[message.from_user.id]['language']])
 

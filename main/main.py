@@ -3,7 +3,6 @@ from aiogram import Bot, Dispatcher
 from aiogram.types import BotCommand
 import handlers
 
-
 env = Env()  # Создаем экземпляр класса Env
 env.read_env('D:\data\Ivan\Programming\OxCowsBot\env\.env')  # Методом read_env() читаем файл .env и загружаем из него переменные в окружение
 
@@ -17,6 +16,7 @@ dp = Dispatcher()
 # Регистриуем роутеры в диспетчере
 dp.include_router(handlers.comand_handlers.Comand_router)
 dp.include_router(handlers.game_handlers.Game_router)
+dp.include_router(handlers.digit_buttons.Digit_router)
 
 async def set_main_menu(bot: Bot):
 

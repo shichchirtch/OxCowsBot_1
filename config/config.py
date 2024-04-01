@@ -27,7 +27,9 @@ personal_dict = {
             'set_SET': 'NotSet',
 
             'Hold_Level': 'SOLO',
-            'game_level': 'SOLO'}
+            'game_level': 'SOLO',
+
+            'inline_user_kit' : ''}
 
 
 tallys_str_bot = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']

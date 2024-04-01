@@ -140,9 +140,14 @@ language_dict = {'if not start': ('Для начала работы с бото�
                     'next combo do':("Ваша следующая комбинация   \U0001f914",
                                      "Your next combo    \U0001f914"," Deine folgende kombo    \U0001f914"),
 
-                    'in game querry':('Продолжайте угадывать !', 'Go on !', 'Weitermachen Sie bitte !')
+                    'in game querry':('Продолжайте угадывать !', 'Go on !', 'Weitermachen Sie bitte !'),
 
+                    'your combo': ( "Ваша Комбинация  ", "Your Combo is  ", "Deine Combo ist"),
+                 'press send' : ('Нажмите кнопку send', 'Press send', 'Drucken send'),
 
-
+                 'not repeat': ('Придумайте для меня комбинацию из чисел от 0 до 9. \n'
+                                'Причем цифры НЕ ДОЛЖНЫ повторяться !',
+                                'NOT REOEAT DIGITS !',
+                                'Nict widerholen nummern Sie bitte !')
 
                  }
