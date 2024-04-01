@@ -2,9 +2,9 @@ from aiogram.types import CallbackQuery
 from lexicon import language_dict
 from aiogram import Router, F
 from config import takers
-from logger import *
+from external_functions import format_string
 
-# stroka_digit = f'\U0001f928                  Вы ввели {takers[callback.from_user.id]["inline_user_kit"]}             \u27A1\uFE0F'
+
 Digit_router = Router()
 
 @Digit_router.callback_query(F.data == '1_pressed')
@@ -12,8 +12,9 @@ async def button_1_press(callback: CallbackQuery):
     await callback.answer()
     if callback.message.text != 'Была нажата 1':
         takers[callback.from_user.id]['inline_user_kit']+='1'
+        pattern = format_string(takers[callback.from_user.id]["inline_user_kit"])
         await callback.message.edit_text(
-            text= '\U0001f928'+' '*20+f'Вы ввели  {takers[callback.from_user.id]["inline_user_kit"]}'+' '*20+'\u27A1\uFE0F',
+            text= '\U0001f928'+' '*19+f'Вы ввели  {pattern}'+' '*19+'\u27A1\uFE0F',
             reply_markup=callback.message.reply_markup)
     await callback.answer('*****')
 
@@ -24,8 +25,9 @@ async def button_2_press(callback: CallbackQuery):
     await callback.answer()
     if callback.message.text != 'Была нажата  2':
         takers[callback.from_user.id]['inline_user_kit']+='2'
+        pattern = format_string(takers[callback.from_user.id]["inline_user_kit"])
         await callback.message.edit_text(
-            text= '\U0001f928'+' '*20+f'Вы ввели  {takers[callback.from_user.id]["inline_user_kit"]}'+' '*20+'\u27A1\uFE0F',
+            text='\U0001f928' + ' ' * 19 + f'Вы ввели  {pattern}' + ' ' * 19 + '\u27A1\uFE0F',
             reply_markup=callback.message.reply_markup)
     await callback.answer('*****')
 
@@ -36,8 +38,9 @@ async def button_3_press(callback: CallbackQuery):
     await callback.answer()
     if callback.message.text != 'Была нажата  3':
         takers[callback.from_user.id]['inline_user_kit']+='3'
+        pattern = format_string(takers[callback.from_user.id]["inline_user_kit"])
         await callback.message.edit_text(
-            text='\U0001f928'+' '*20+f'Вы ввели  {takers[callback.from_user.id]["inline_user_kit"]}'+' '*20+'\u27A1\uFE0F',
+            text='\U0001f928' + ' ' * 19 + f'Вы ввели  {pattern}' + ' ' * 19 + '\u27A1\uFE0F',
             reply_markup=callback.message.reply_markup)
     await callback.answer('*****')
 
@@ -49,8 +52,9 @@ async def button_4_press(callback: CallbackQuery):
     await callback.answer()
     if callback.message.text != 'Была нажата 4':
         takers[callback.from_user.id]['inline_user_kit']+='4'
+        pattern = format_string(takers[callback.from_user.id]["inline_user_kit"])
         await callback.message.edit_text(
-            text='\U0001f928'+' '*20+f'Вы ввели  {takers[callback.from_user.id]["inline_user_kit"]}'+' '*20+'\u27A1\uFE0F',
+            text='\U0001f928' + ' ' * 19 + f'Вы ввели  {pattern}' + ' ' * 19 + '\u27A1\uFE0F',
             reply_markup=callback.message.reply_markup)
     await callback.answer('*****')
 
@@ -61,8 +65,9 @@ async def button_5_press(callback: CallbackQuery):
     await callback.answer()
     if callback.message.text != 'Была нажата 5':
         takers[callback.from_user.id]['inline_user_kit']+='5'
+        pattern = format_string(takers[callback.from_user.id]["inline_user_kit"])
         await callback.message.edit_text(
-            text='\U0001f928'+' '*20+f'Вы ввели  {takers[callback.from_user.id]["inline_user_kit"]}'+' '*20+'\u27A1\uFE0F',
+            text='\U0001f928' + ' ' * 19 + f'Вы ввели  {pattern}' + ' ' * 19 + '\u27A1\uFE0F',
             reply_markup=callback.message.reply_markup)
     await callback.answer('*****')
 
@@ -74,8 +79,9 @@ async def button_6_press(callback: CallbackQuery):
     await callback.answer()
     if callback.message.text != 'Была нажата 6':
         takers[callback.from_user.id]['inline_user_kit']+='6'
+        pattern = format_string(takers[callback.from_user.id]["inline_user_kit"])
         await callback.message.edit_text(
-            text='\U0001f928'+' '*20+f'Вы ввели  {takers[callback.from_user.id]["inline_user_kit"]}'+' '*20+'\u27A1\uFE0F',
+            text='\U0001f928' + ' ' * 19 + f'Вы ввели  {pattern}' + ' ' * 19 + '\u27A1\uFE0F',
             reply_markup=callback.message.reply_markup)
     await callback.answer('*****')
 
@@ -86,8 +92,9 @@ async def button_7_press(callback: CallbackQuery):
     await callback.answer()
     if callback.message.text != 'Была нажата 7':
         takers[callback.from_user.id]['inline_user_kit']+='7'
+        pattern = format_string(takers[callback.from_user.id]["inline_user_kit"])
         await callback.message.edit_text(
-            text='\U0001f928'+' '*20+f'Вы ввели  {takers[callback.from_user.id]["inline_user_kit"]}'+' '*20+'\u27A1\uFE0F',
+            text='\U0001f928' + ' ' * 19 + f'Вы ввели  {pattern}' + ' ' * 19 + '\u27A1\uFE0F',
             reply_markup=callback.message.reply_markup)
     await callback.answer('*****')
 
@@ -98,8 +105,9 @@ async def button_8_press(callback: CallbackQuery):
     await callback.answer()
     if callback.message.text != 'Была нажата 8':
         takers[callback.from_user.id]['inline_user_kit']+='8'
+        pattern = format_string(takers[callback.from_user.id]["inline_user_kit"])
         await callback.message.edit_text(
-            text='\U0001f928'+' '*20+f'Вы ввели  {takers[callback.from_user.id]["inline_user_kit"]}'+' '*20+'\u27A1\uFE0F',
+            text='\U0001f928' + ' ' * 19 + f'Вы ввели  {pattern}' + ' ' * 19 + '\u27A1\uFE0F',
             reply_markup=callback.message.reply_markup)
     await callback.answer('*****')
 
@@ -110,8 +118,9 @@ async def button_9_press(callback: CallbackQuery):
     await callback.answer()
     if callback.message.text != 'Была нажата 9':
         takers[callback.from_user.id]['inline_user_kit']+='9'
+        pattern = format_string(takers[callback.from_user.id]["inline_user_kit"])
         await callback.message.edit_text(
-            text='\U0001f928'+' '*20+f'Вы ввели  {takers[callback.from_user.id]["inline_user_kit"]}'+' '*20+'\u27A1\uFE0F',
+            text='\U0001f928' + ' ' * 19 + f'Вы ввели  {pattern}' + ' ' * 19 + '\u27A1\uFE0F',
             reply_markup=callback.message.reply_markup)
     await callback.answer('*****')
 
@@ -122,8 +131,9 @@ async def button_0_press(callback: CallbackQuery):
     await callback.answer()
     if callback.message.text != 'Была нажата 0':
         takers[callback.from_user.id]['inline_user_kit']+='0'
+        pattern = format_string(takers[callback.from_user.id]["inline_user_kit"])
         await callback.message.edit_text(
-            text='\U0001f928'+' '*20+f'Вы ввели  {takers[callback.from_user.id]["inline_user_kit"]}'+' '*20+'\u27A1\uFE0F',
+            text='\U0001f928' + ' ' * 19 + f'Вы ввели  {pattern}' + ' ' * 19 + '\u27A1\uFE0F',
             reply_markup=callback.message.reply_markup)
     await callback.answer('*****')
 

@@ -5,11 +5,10 @@ from lexicon import *
 from filters import *
 from external_functions import *
 from keyboards import *
-
-
 from config import takers, tallys_str_bot, Four_bools
 from aiogram.types import Message, ReplyKeyboardRemove
 import time
+
 Game_router = Router()
 
 @Game_router.message(F.content_type != ContentType.TEXT)
@@ -77,7 +76,7 @@ async def process_positive_answer(message: Message):
 
     elif takers[message.from_user.id]['Hold_Level'] == 'WITH SMART BOT':
         takers[message.from_user.id]["secret_kit"] = get_secret_kit(tallys_str_bot)
-        logger.warning(f'Структура словаря takers =  {takers}')
+        print(f'Структура словаря takers =  {takers}')
         std_out_logger.info(f'BOTs NUMBER  =  {takers[message.from_user.id]["secret_kit"]} ')
         await message.answer(language_dict['bot_ask_user_combo'][takers[message.from_user.id]['language']],
                              reply_markup=ReplyKeyboardRemove())
@@ -103,7 +102,7 @@ async def process_negative_answer(message: Message):
         await message.answer(language_dict['wrong sent data'][takers[message.from_user.id]['language']])
 
 
-@Game_router.message(DATA_IS_DIGIT(), GAME_WITH_BOT(), EMPTY_BOT_LIST())
+@Game_router.message(DATA_IS_DIGIT(), GAME_WITH_BOT(), EMPTY_BOT_LIST(), NOT_USER_COMBO(), INLINE_FILTER())
 async def set_user_combo(message: Message):
     """Этот хэндлер срабатывает, только тогда, когда бот тоже  будет отгадывать комбо юзера"""
     print('Этот хэндлер должен срабатывать тольок один раз за игру с ботом !')
@@ -123,7 +122,7 @@ async def set_user_combo(message: Message):
     start_kit = user_combo  # Уже введена и отловлена хэндлером ! ! !
 
     first_bot_data = get_secret_kit(tallys_str_bot)  #  Так бот получает комбинацию, с которой начинает угадывать комбо юзера
-    std_err_logger.info(f'first_bot_data =  {first_bot_data}')
+    print(f'126 first_bot_data =  {first_bot_data}')
     final_res.append(first_bot_data)  # Аппендим первую попытку
     rest_bot_chisla_arr = list(set(tallys_str_bot).symmetric_difference(set(first_bot_data)))  # Это набор оставшихся
                                                                                                     # неиспользованными при построении первой комбинации ботом чисел
@@ -199,16 +198,19 @@ async def set_user_combo(message: Message):
     elif len(temp_game_arr) == 4:
         final_res = verify_bools_position(first_bot_data, start_kit, final_res)
 
-    std_err_logger.info(f"Список попыток бота {final_res}")
-
+    # print(f"202 Список попыток бота {final_res}")
+    # print('PREREVERS PRINT ******************************************************************')
     final_res = final_res[::-1]  # Делаю реверс списка, чтобы можно было удалять элементы с конца методом рор()
     std_out_logger.info(f'AFTER REWERS 210 user combo = {user_combo}')
     print('reversw попыток бота', final_res, 'att = ', len(final_res))
+
     if takers[message.from_user.id]["game_level"] == "WITH SMART BOT":
         if len(final_res) > 8:
             final_res = [final_res[0]] + final_res[1:-1:2]
             takers[message.from_user.id]["bot_list"] = final_res[:9]
-            std_err_logger.info(f'cutting_fin_res =  {final_res}')
+            # print(f'221 cutting_fin_res =  {final_res}') # Вывод обрезанного списка попыток
+        else:
+            takers[message.from_user.id]["bot_list"] = final_res
     else:
         takers[message.from_user.id]["bot_list"] = final_res
 
@@ -257,8 +259,6 @@ async def solo_gaming(message: Message):
         await message.answer(text=language_dict['play new game after user wins'][
             takers[message.from_user.id]['language']],
                              reply_markup=keyboard_after_finish)
-
-
 @Game_router.message(BOT_USER_GAMING(), DATA_IS_DIGIT())
 async def gaming_with_bot(message: Message):
     """Сюда попадают комбинации, которые вводит юзер"""

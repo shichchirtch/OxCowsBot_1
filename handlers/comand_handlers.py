@@ -76,6 +76,7 @@ async def process_cancel_command(message: Message):
         if takers[message.from_user.id]['in_game']:
             takers[message.from_user.id]['in_game'] = False
             takers[message.from_user.id]['game_list'] = []
+            takers[message.from_user.id]['bot_list'] = []
             takers[message.from_user.id]['game_level'] = 'SOLO'
             takers[message.from_user.id]['secret_kit'] = 'no_data'
             takers[message.from_user.id]['schritt'] = 0

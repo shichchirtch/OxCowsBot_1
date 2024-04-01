@@ -2,11 +2,13 @@ import time
 from random import sample
 from aiogram.types import Message
 
+
 def time_counter(start_time):
     current_time = time.monotonic()
     secund = (current_time - start_time) % 60
     minut = (current_time - start_time) // 60
     return int(minut), int(secund)
+
 
 def get_secret_kit(bot_str_tally):
     secret_kit = sample(bot_str_tally, k=4)
@@ -22,7 +24,7 @@ def check_bools(funk, secret_data, solo_data):
     return False
 
 
-def seek_bools(bot_tally, user_data): # Сначала то, что угадывается, потом то, что вводится в попытке угадать
+def seek_bools(bot_tally, user_data):  # Сначала то, что угадывается, потом то, что вводится в попытке угадать
     temp_game_arr = []
     for k, num in enumerate(user_data):
         if num not in bot_tally:
@@ -33,10 +35,12 @@ def seek_bools(bot_tally, user_data): # Сначала то, что угадыв
             temp_game_arr.append('Cow')
     return temp_game_arr
 
-def user_attempt_guess_botCombo(us_dict:dict, userID:int, message: Message):
+
+def user_attempt_guess_botCombo(us_dict: dict, userID: int, message: Message):
     us_dict[userID]['schritt'] += 1
     us_dict[userID]['game_list'].append(message.text)
     return us_dict
+
 
 def reset_user_dict_after_finish(us_dict: dict, userID: int) -> dict:
     us_dict[userID]['bot_win'] = False
@@ -48,14 +52,16 @@ def reset_user_dict_after_finish(us_dict: dict, userID: int) -> dict:
     us_dict[userID]['user_comb'] = 'setting_data'
     us_dict[userID]['game_level'] = us_dict[userID]['Hold_Level']
     us_dict[userID]['secret_kit'] = 'no_data'
-    us_dict[userID]['inline_user_kit']=''
+    us_dict[userID]['inline_user_kit'] = ''
     return us_dict
 
-def verify_bools_position(bot_kit: list, secret_kit: list,  bot_test_combination:list):
+
+def verify_bools_position(bot_kit: list, secret_kit: list, bot_test_combination: list):
     a, b, c, d = bot_kit
-    super_tup = ([a, b, c, d], [b, c, d, a], [c, d, a, b], [d, a, b, c], [b, a, d, c], [b, c, a, d], [d, b, c, a],
-                 [d, c, b, a], [c, a, d, b], [c, b, d, a], [c, a, b, d], [c, d, b, a], [d, c, a, b], [d, b, a, c],
-                 [a, c, b, d], [a, d, b, c], [a, c, d, b], [a, d, c, b], [b, d, a, c], [c, b, a, d], [b,a,c,d])
+    super_tup = ([a, b, c, d], [a, d, b, c], [a, c, d, b], [a, c, b, d], [a, d, c, b], [a, b, d, c],
+                 [b, c, d, a], [b, a, c, d], [b, d, a, c], [b, a, d, c], [b, c, a, d], [b, d, c, a],
+                 [c, d, a, b], [c, a, d, b], [c, b, d, a], [c, b, a, d], [c, d, b, a], [c, a, b, d],
+                 [d, b, a, c], [d, c, b, a], [d, a, b, c], [d, c, a, b], [d, b, c, a], [d, a, c, b])
     func_counter = -1
     for spisok in super_tup:
         func_counter += 1
@@ -64,6 +70,7 @@ def verify_bools_position(bot_kit: list, secret_kit: list,  bot_test_combination
         if spisok == secret_kit:
             return bot_test_combination
     return "something goes wrong"
+
 
 def verify_last_cow(bot_data, secret_kit):
     set_bot_data = set(bot_data)
@@ -94,3 +101,10 @@ def find_one_cow_in_6_numbers(rest_arr, secret_kit):
     last_tally = set(rest_arr).intersection(set(secret_kit)).pop()
     return last_tally
 
+
+def format_string(inline: str) -> str:
+    empty_space = 4
+    dlina_inline = len(inline)
+    empty_space = empty_space - dlina_inline
+    returned_stroka = inline + "*" * empty_space
+    return returned_stroka

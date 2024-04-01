@@ -18,6 +18,7 @@ dp.include_router(handlers.comand_handlers.Comand_router)
 dp.include_router(handlers.game_handlers.Game_router)
 dp.include_router(handlers.digit_buttons.Digit_router)
 
+
 async def set_main_menu(bot: Bot):
 
     # Создаем список с командами и их описанием для кнопки menu

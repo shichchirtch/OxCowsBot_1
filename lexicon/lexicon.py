@@ -109,9 +109,9 @@ language_dict = {'if not start': ('Для начала работы с бото�
                                 'To start working with the bot, enter /start',
                                 'Um mit dem Bot zu arbeiten, geben Sie /start ein'
                                 ),
-                 'solo_bot_guessed': ('Комбинация загадана ! \nПопробуйте отгадать !',
-                                      "Bot's COMBO is done ! \nTry to deencrypt it !",
-                                      'Die Kombination ist versteckt! \bVersuchen zu erraten!'),
+                 'solo_bot_guessed': ('   Комбинация загадана !                          \U0001f913\nПопробуйте отгадать !',
+                                      "    Bot's COMBO is done !                          \U0001f913\nTry to deencrypt it !",
+                                      '    Die Kombination ist versteckt!                 \U0001f913\bVersuchen zu erraten!'),
 
                  'bot_ask_user_combo': ('Комбинация загадана ! \nЗагадайте мне свою !',
                                         "Bot's COMBO is done ! \nGive me yours !",

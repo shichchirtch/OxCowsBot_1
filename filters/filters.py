@@ -54,11 +54,11 @@ class DATA_IS_DIGIT(BaseFilter):
             if takers[message.from_user.id]['inline_user_kit'].isdigit() and len(temp_combo_set) == 4:
                 return True
             return False
-
-        temp_combo_set = set(message.text)
-        if message.text.isdigit() and len(temp_combo_set) == 4:
-            return True
-        return False
+        else:
+            temp_combo_set = set(message.text)
+            if message.text.isdigit() and len(temp_combo_set) == 4:
+                return True
+            return False
 
 
 class SOLO_GAME_PROCESS(BaseFilter):
@@ -94,6 +94,9 @@ class EMPTY_BOT_LIST(BaseFilter):
         if not takers[message.from_user.id]['bot_list'] :
             return True
         return False
-filter_list_for_game_handlers = (SET_USER_SET, BOT_COMB, DATA_IS_NOT_DIGIT, GAME_STATUS_FALSE,
-                             DATA_IS_DIGIT, GAME_WITH_BOT, SOLO_GAME_PROCESS, BOT_USER_GAMING)
 
+class NOT_USER_COMBO(BaseFilter):
+    async def __call__(self, message: Message):
+        if takers[message.from_user.id]['user_comb']=='setting_data' :
+            return True
+        return False
