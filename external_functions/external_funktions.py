@@ -48,6 +48,7 @@ def reset_user_dict_after_finish(us_dict: dict, userID: int) -> dict:
     us_dict[userID]['user_comb'] = 'setting_data'
     us_dict[userID]['game_level'] = us_dict[userID]['Hold_Level']
     us_dict[userID]['secret_kit'] = 'no_data'
+    us_dict[userID]['inline_user_kit']=''
     return us_dict
 
 def verify_bools_position(bot_kit: list, secret_kit: list,  bot_test_combination:list):

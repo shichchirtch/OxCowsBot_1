@@ -85,11 +85,15 @@ class PRE_START(BaseFilter):
         return False
 
 class INLINE_FILTER(BaseFilter):
-    async def __call__(self, massage:Message):
+    async def __call__(self, massage: Message):
         if massage.text == 'send':
             return False
         return True
-
+class EMPTY_BOT_LIST(BaseFilter):
+    async def __call__(self, message: Message):
+        if not takers[message.from_user.id]['bot_list'] :
+            return True
+        return False
 filter_list_for_game_handlers = (SET_USER_SET, BOT_COMB, DATA_IS_NOT_DIGIT, GAME_STATUS_FALSE,
                              DATA_IS_DIGIT, GAME_WITH_BOT, SOLO_GAME_PROCESS, BOT_USER_GAMING)
 

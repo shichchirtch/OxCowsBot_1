@@ -62,7 +62,10 @@ async def process_positive_answer(message: Message):
         std_out_logger.info(f'BOTs COMBO  =  {takers[message.from_user.id]["secret_kit"]} ')
         time.sleep(1)
         await message.answer(language_dict['solo_bot_guessed'][takers[message.from_user.id]['language']],
-                             reply_markup=ReplyKeyboardRemove())
+                             reply_markup=keyboard_digits)
+        await message.answer(text=language_dict['press send'][takers[message.from_user.id]['language']],
+                             reply_markup=usual_clava)
+
 
     elif takers[message.from_user.id]['Hold_Level'] == 'WITH SILLY BOT':
 
@@ -100,11 +103,12 @@ async def process_negative_answer(message: Message):
         await message.answer(language_dict['wrong sent data'][takers[message.from_user.id]['language']])
 
 
-@Game_router.message(DATA_IS_DIGIT(), GAME_WITH_BOT(), INLINE_FILTER())
+@Game_router.message(DATA_IS_DIGIT(), GAME_WITH_BOT(), EMPTY_BOT_LIST())
 async def set_user_combo(message: Message):
     """Этот хэндлер срабатывает, только тогда, когда бот тоже  будет отгадывать комбо юзера"""
-
+    print('Этот хэндлер должен срабатывать тольок один раз за игру с ботом !')
     user_combo = list(message.text)
+    print(f'print works str 115 user combo {user_combo}')
     takers[message.from_user.id]["user_comb"] = user_combo
     await message.answer(text=language_dict['after_user_zagadal_combo'][takers[message.from_user.id]['language']],
                          reply_markup=keyboard_digits)
@@ -113,12 +117,10 @@ async def set_user_combo(message: Message):
 
 
     final_res = takers[message.from_user.id]["bot_list"]  # сюда будем аппендить все комбинации ответов бота
-    std_out_logger.info(f'\n ********  {takers[message.from_user.id]["user_name"]}, gaming with BOT! ********')
+    std_out_logger.info(f'\n NOT PRINT********  {takers[message.from_user.id]["user_name"]}, gaming with BOT! ********')
 
     # Что мы имеем на старте
     start_kit = user_combo  # Уже введена и отловлена хэндлером ! ! !
-
-
 
     first_bot_data = get_secret_kit(tallys_str_bot)  #  Так бот получает комбинацию, с которой начинает угадывать комбо юзера
     std_err_logger.info(f'first_bot_data =  {first_bot_data}')
@@ -198,8 +200,9 @@ async def set_user_combo(message: Message):
         final_res = verify_bools_position(first_bot_data, start_kit, final_res)
 
     std_err_logger.info(f"Список попыток бота {final_res}")
+
     final_res = final_res[::-1]  # Делаю реверс списка, чтобы можно было удалять элементы с конца методом рор()
-    std_out_logger.info(f'user combo = {user_combo}')
+    std_out_logger.info(f'AFTER REWERS 210 user combo = {user_combo}')
     print('reversw попыток бота', final_res, 'att = ', len(final_res))
     if takers[message.from_user.id]["game_level"] == "WITH SMART BOT":
         if len(final_res) > 8:
@@ -211,10 +214,18 @@ async def set_user_combo(message: Message):
 
 @Game_router.message(SOLO_GAME_PROCESS(), DATA_IS_DIGIT())
 async def solo_gaming(message: Message):
+    """В хэндлер попадают комбинации юзера в режиме SOLO"""
     userID = message.from_user.id
     std_out_logger.info(f'\n ********  {takers[message.from_user.id]["user_name"]}, gaming! ********')
     user_attempt_guess_botCombo(takers, userID, message)
-    temp_res = seek_bools(takers[message.from_user.id]['secret_kit'], list(message.text))
+    if message.text == 'send':
+        sending_user_combo = list(takers[message.from_user.id]['inline_user_kit'])  # Если Юзер ввел комбинацию инлайн клавиатурой
+    else:
+        sending_user_combo = list(message.text)  # Вот здесь присваиваем значение комбинации введенной юзером
+
+    takers[message.from_user.id]["game_list"].append(sending_user_combo)
+    temp_res = seek_bools(takers[message.from_user.id]['secret_kit'], sending_user_combo)
+
     std_out_logger.info(f"{takers[message.from_user.id]['user_name']} temp_res = {temp_res}")
 
     if temp_res != Four_bools:
@@ -223,11 +234,12 @@ async def solo_gaming(message: Message):
                   f"{takers[message.from_user.id]['schritt']} Ход  {temp_res.count('Ox')} Bulls, {temp_res.count('Cow')} Cows")
         await message.reply(stroka)
         time.sleep(1)
-        takers[message.from_user.id]['inline_user_kit'] = ''
+
         await message.answer(language_dict["next combo do"][takers[message.from_user.id]["language"]],
                              reply_markup=keyboard_digits)
         await message.answer(text=language_dict['press send'][takers[message.from_user.id]['language']],
                              reply_markup=usual_clava)
+        takers[message.from_user.id]['inline_user_kit'] = ''
     else:
         stroka = (f"{takers[message.from_user.id]['schritt']}  Ход  {temp_res.count('Ox')} Bools !!! \n")
         takers[message.from_user.id]['wins'] += 1
@@ -262,6 +274,7 @@ async def gaming_with_bot(message: Message):
         temp_res = list(takers[message.from_user.id]['inline_user_kit'])  # Если Юзер ввел комбинацию инлайн клавиатурой
     else:
         temp_res = list(message.text)  # Вот здесь присваиваем значение комбинации введенной юзером
+    takers[message.from_user.id]["game_list"].append(temp_res)
 
     if temp_game_arr != Four_bools:
             # USER PART
@@ -306,9 +319,9 @@ async def gaming_with_bot(message: Message):
                                      reply_markup=keyboard_after_finish)
 
     else:
-        bot_win_stroka = (f"Бот угадал  !    \U0001f973\nВаша комбинация была {' '.join(processing_combo)}\n"
-                          f"А моя комбинация {' '.join(takers[message.from_user.id]['secret_kit'])}\n"
-                          f"Сыграем ещё ?")
+        bot_win_stroka = (language_dict['bot ugadal'][takers[message.from_user.id]['language']]+f"{' '.join(processing_combo)}\n"
+                          + language_dict['bots COMBO was'][takers[message.from_user.id]['language']]+
+                          f"{' '.join(takers[message.from_user.id]['secret_kit'])}\n")
         takers[message.from_user.id]['bot_pobeda'] += 1
 
         await message.answer(text=bot_win_stroka)

@@ -3,7 +3,7 @@ sticker_dict = {'process_cancel_command': 'CAACAgIAAxkBAAEEWGVmBURfPi0uMEx284kly
                                         'win 4 bools':'CAACAgIAAxkBAAEEXB1mBgjqPpXFf7EzEFOISlkgVpYcxAACGgMAApzW5wqlfyp90X0oAjQE',
                                                 'silly bot':'CAACAgIAAxkBAAEEYf5mB09Q0Qup4Z7uZjY7Q7bJnSNSdAACIQMAApzW5wofM3WHdLVAUzQE',
                                         'rocket bull':'CAACAgIAAxkBAAEEYfpmB08-hfM94jjkGJ00uFhWuMPM1AACFwMAApzW5wrW9EirtTiB2TQE',
-                                        'BOT WINS' :'CAACAgIAAxkBAAEEYfpmB08-hfM94jjkGJ00uFhWuMPM1AACFwMAApzW5wrW9EirtTiB2TQE'
+                                        'BOT WINS' :'CAACAgIAAxkBAAEEYfxmB09HXs9KAti6ObqUqwjMZeBSgQACEgMAApzW5wocUkO0JHVdKDQE'
                 }
 positiv_answer = ['да', 'давай', 'сыграем', 'игра', 'yes', 'es', 'нуы',
                   'играть', 'хочу играть', 'OK', 'ok', 'хочу', 'lfdfq',
@@ -148,6 +148,14 @@ language_dict = {'if not start': ('Для начала работы с бото�
                  'not repeat': ('Придумайте для меня комбинацию из чисел от 0 до 9. \n'
                                 'Причем цифры НЕ ДОЛЖНЫ повторяться !',
                                 'NOT REOEAT DIGITS !',
-                                'Nict widerholen nummern Sie bitte !')
+                                'Nict widerholen nummern Sie bitte !'),
+
+                 'bot ugadal' : ( "Бот угадал  !    \U0001f973\nВаша комбинация была  ",
+                                  'BOT WINS  !    \U0001f973\nYOUR  COMBO WAS  ',
+                                  'BOT HAT GEWONNEN  !    \U0001f973\nDEINE COMBO WAR  '),
+
+                 'bots COMBO was':('А моя комбинация  ', 'My Combo was ', 'Meine Combo war  ')
+
+
 
                  }
