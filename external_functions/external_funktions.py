@@ -1,6 +1,8 @@
 import time
 from random import sample
 from aiogram.types import Message
+from lexicon import language_dict
+from config import *
 
 
 def time_counter(start_time):
@@ -63,7 +65,7 @@ def verify_bools_position(bot_kit: list, secret_kit: list, bot_test_combination:
                  [c, d, a, b], [c, a, d, b], [c, b, d, a], [c, b, a, d], [c, d, b, a], [c, a, b, d],
                  [d, b, a, c], [d, c, b, a], [d, a, b, c], [d, c, a, b], [d, b, c, a], [d, a, c, b])
     for spisok in super_tup:
-        if spisok not in bot_kit:
+        if spisok not in bot_test_combination:
             bot_test_combination.append(spisok)  # Ну и аппендим сразу это в список комбинаций, если его там ещё нет
         if spisok == secret_kit:
             return bot_test_combination
@@ -107,8 +109,123 @@ def format_string(inline: str) -> str:
     returned_stroka = inline + "*" * empty_space
     return returned_stroka
 
-def append_kit(bot_kit: list, bot_test_combination:list):
+
+def append_kit(bot_kit: list, bot_test_combination: list):
     if bot_kit not in bot_test_combination:
         bot_test_combination.append(bot_kit)
         return bot_test_combination
     return bot_test_combination
+
+
+def format_f_string(user_Id: int, user_combo: str, temp_res: list) -> str:
+    responce = (f"{language_dict['your combo'][takers[user_Id]['language']]} <b>{user_combo}</b>\n"
+                f"<b>{takers[user_Id]['schritt']}</b> {language_dict['Xod'][takers[user_Id]['language']]}")
+
+    if temp_res.count('Ox') == 0:
+        if temp_res.count('Cow') == 0:
+            string = (responce + f"  {language_dict['no cows'][takers[user_Id]['language']]}   \U0001f937")
+            return string
+        elif temp_res.count('Cow') == 1:
+            string = (responce + f"  <b>1</b>  {language_dict['1 cow'][takers[user_Id]['language']]}     \U0001f42e")
+            return string
+        else:
+            cow_str = " "
+            for cow in range(temp_res.count('Cow')):
+                cow_str += "\U0001f42e" + "  "
+            string = (
+                        responce + f"  <b>{temp_res.count('Cow')}</b>  {language_dict['more cows'][takers[user_Id]['language']]}     {cow_str}")
+            return string
+    elif temp_res.count("Ox") == 1:
+        if temp_res.count('Cow') == 0:
+            string = (responce + f"  <b>1</b>  {language_dict['1 bull'][takers[user_Id]['language']]}     \U0001f402")
+            return string
+        elif temp_res.count('Cow') == 1:
+            string = (responce + f"  <b>1</b>  {language_dict['1 bull'][takers[user_Id]['language']]}  "
+                                 f"  <b>1</b>  {language_dict['1 cow'][takers[user_Id]['language']]}   \U0001f402    \U0001f42e")
+            return string
+        else:
+            cow_str = " "
+            for cow in range(temp_res.count('Cow')):
+                cow_str += "\U0001f42e" + "  "
+            string = (responce + f"  <b>1</b>  {language_dict['1 bull'][takers[user_Id]['language']]}  "
+                                 f"  <b>{temp_res.count('Cow')}</b>  {language_dict['more cows'][takers[user_Id]['language']]}   \U0001f402  {cow_str}")
+            return string
+    elif temp_res.count("Ox") > 1:
+        ox_str = " "
+        for ox in range(temp_res.count('Ox')):
+            ox_str += "\U0001f402" + "  "
+        if temp_res.count('Cow') == 0:
+            string = (
+                        responce + f"  <b>{temp_res.count('Ox')}</b>  {language_dict['more bulls'][takers[user_Id]['language']]}   {ox_str}")
+            return string
+        if temp_res.count('Cow') == 1:
+            string = (
+                        responce + f"  <b>{temp_res.count('Ox')}</b>  {language_dict['more bulls'][takers[user_Id]['language']]}  "
+                                   f"  <b>1</b>  {language_dict['1 cow'][takers[user_Id]['language']]}   {ox_str} \U0001f42e")
+            return string
+        else:
+            cow_str = " "
+            for cow in range(temp_res.count('Cow')):
+                cow_str += "\U0001f42e" + "  "
+
+            string = (
+                        responce + f"  <b>{temp_res.count('Ox')}</b>  {language_dict['more bulls'][takers[user_Id]['language']]}"
+                                   f"  <b>{temp_res.count('Cow')}</b>  {language_dict['more cows'][takers[user_Id]['language']]}  {ox_str} {cow_str}")
+            return string
+
+
+def format_bot_response(user_Id: int, bot_att: str, temp_res: list):
+    bot_responce = f"{language_dict['bot says'][takers[user_Id]['language']]} <b>{bot_att}</b>\n"
+    if temp_res.count('Ox') == 0:
+        if temp_res.count('Cow') == 0:
+            string = (bot_responce + f"  {language_dict['no cows'][takers[user_Id]['language']]}   \U0001f937")
+            return string
+        elif temp_res.count('Cow') == 1:
+            string = (
+                        bot_responce + f"  <b>1</b>  {language_dict['1 cow'][takers[user_Id]['language']]}     \U0001f42e")
+            return string
+        else:
+            cow_str = " "
+            for cow in range(temp_res.count('Cow')):
+                cow_str += "\U0001f42e" + "  "
+            string = (
+                        bot_responce + f"  <b>{temp_res.count('Cow')}</b>  {language_dict['more cows'][takers[user_Id]['language']]}     {cow_str}")
+            return string
+    elif temp_res.count("Ox") == 1:
+        if temp_res.count('Cow') == 0:
+            string = (
+                        bot_responce + f"  <b>1</b>  {language_dict['1 bull'][takers[user_Id]['language']]}     \U0001f402")
+            return string
+        elif temp_res.count('Cow') == 1:
+            string = (bot_responce + f"  <b>1</b>  {language_dict['1 bull'][takers[user_Id]['language']]}  "
+                                     f"  <b>1</b>  {language_dict['1 cow'][takers[user_Id]['language']]}   \U0001f402    \U0001f42e")
+            return string
+        else:
+            cow_str = " "
+            for cow in range(temp_res.count('Cow')):
+                cow_str += "\U0001f42e" + "  "
+            string = (bot_responce + f"  <b>1</b>  {language_dict['1 bull'][takers[user_Id]['language']]}  "
+                                     f"  <b>{temp_res.count('Cow')}</b>  {language_dict['more cows'][takers[user_Id]['language']]}   \U0001f402  {cow_str}")
+            return string
+    elif temp_res.count("Ox") > 1:
+        ox_str = " "
+        for ox in range(temp_res.count('Ox')):
+            ox_str += "\U0001f402" + "  "
+        if temp_res.count('Cow') == 0:
+            string = (
+                        bot_responce + f"  <b>{temp_res.count('Ox')}</b>  {language_dict['more bulls'][takers[user_Id]['language']]}   {ox_str}")
+            return string
+        if temp_res.count('Cow') == 1:
+            string = (
+                        bot_responce + f"  <b>{temp_res.count('Ox')}</b>  {language_dict['more bulls'][takers[user_Id]['language']]}  "
+                                       f"  <b>1</b>  {language_dict['1 cow'][takers[user_Id]['language']]}   {ox_str} \U0001f42e")
+            return string
+        else:
+            cow_str = " "
+            for cow in range(temp_res.count('Cow')):
+                cow_str += "\U0001f42e" + "  "
+
+            string = (
+                        bot_responce + f"  <b>{temp_res.count('Ox')}</b>  {language_dict['more bulls'][takers[user_Id]['language']]}"
+                                       f"  <b>{temp_res.count('Cow')}</b>  {language_dict['more cows'][takers[user_Id]['language']]}  {ox_str} {cow_str}")
+            return string

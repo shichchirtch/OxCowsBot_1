@@ -10,51 +10,54 @@ import time
 
 Solo_router = Router()
 
+
 @Solo_router.message(SOLO_GAME_PROCESS(), DATA_IS_DIGIT())
 async def solo_gaming(message: Message):
     """В хэндлер попадают комбинации юзера в режиме SOLO"""
+
     userID = message.from_user.id
-    std_out_logger.info(f'\n ********  {takers[message.from_user.id]["user_name"]}, gaming! ********')
     user_attempt_guess_botCombo(takers, userID, message)
     if message.text == 'send':
-        sending_user_combo = list(takers[message.from_user.id]['inline_user_kit'])  # Если Юзер ввел комбинацию инлайн клавиатурой
+        sending_user_combo = list(
+            takers[userID]['inline_user_kit'])  # Если Юзер ввел комбинацию инлайн клавиатурой
     else:
         sending_user_combo = list(message.text)  # Вот здесь присваиваем значение комбинации введенной юзером
 
-    takers[message.from_user.id]["game_list"].append(sending_user_combo)
-    temp_res = seek_bools(takers[message.from_user.id]['secret_kit'], sending_user_combo)
+    takers[userID]["game_list"].append(sending_user_combo)
+    temp_res = seek_bools(takers[userID]['secret_kit'], sending_user_combo)
 
-    std_out_logger.info(f"{takers[message.from_user.id]['user_name']} ход {takers[message.from_user.id]['schritt']}, совпадения = {temp_res}")
+    std_out_logger.info(
+        f"SOLO {takers[userID]['user_name']} ход {takers[userID]['schritt']}, совпадения = {temp_res}")
 
     if temp_res != Four_bools:
-        current_data = " ".join(list(takers[message.from_user.id]['inline_user_kit']))
-        stroka = (f"{language_dict['your combo'][takers[message.from_user.id]['language']]} <b>{current_data}</b>\n"
-                  f"<b>{takers[message.from_user.id]['schritt']}</b> Ход  "
-                  f"<b>{temp_res.count('Ox')}</b> Bulls, <b>{temp_res.count('Cow')}</b> Cows")
+        current_data = " ".join(list(takers[userID]['inline_user_kit']))
+        stroka = format_f_string(userID, current_data, temp_res)
         await message.reply(stroka)
         time.sleep(1)
-
-        await message.answer(language_dict["next combo do"][takers[message.from_user.id]["language"]],
+        await message.answer(language_dict["next combo do"][takers[userID]["language"]],
                              reply_markup=keyboard_digits)
-        await message.answer(text=language_dict['press send'][takers[message.from_user.id]['language']],
+        await message.answer(text=language_dict['press send'][takers[userID]['language']],
                              reply_markup=usual_clava)
         takers[message.from_user.id]['inline_user_kit'] = ''
     else:
-        stroka = (f"{takers[message.from_user.id]['schritt']}  Ход  <b>{temp_res.count('Ox')} Bools !!!</b> \n")
+        stroka = (f"{takers[userID]['schritt']}  Ход  <b>{temp_res.count('Ox')} Bools !!!</b> \n")
         takers[message.from_user.id]['wins'] += 1
-        pip_print = " ".join(takers[message.from_user.id]["secret_kit"])
+        pip_print = " ".join(takers[userID]["secret_kit"])
         time.sleep(1)
         await message.answer(stroka)
         await message.answer_sticker(sticker_dict['win 4 bools'])
-        await message.answer(language_dict['wow'][takers[message.from_user.id]['language']] +
-                             '<b>'+takers[message.from_user.id]['user_name']+'</b>' +
-                             language_dict['user guessed'][takers[message.from_user.id]['language']] +
+        await message.answer(language_dict['wow'][takers[userID]['language']] +
+                             '<b>' + takers[message.from_user.id]['user_name'] + '</b>' +
+                             language_dict['user guessed'][takers[userID]['language']] +
                              str(pip_print))
+        std_out_logger.info(
+            f"SOLO ******************* {takers[message.from_user.id]['user_name']} "
+            f"ход {takers[userID]['schritt']}  WINS\n")
         time.sleep(1)
 
         reset_user_dict_after_finish(takers, userID)  # Здесь происходит перезапись значений в словаре юзера
-        await message.answer(text=language_dict['play new game after user wins'][
-            takers[message.from_user.id]['language']],
+        await message.answer(text=language_dict['play new game after user wins']
+            [takers[message.from_user.id]['language']],
                              reply_markup=keyboard_after_finish)
 
 
@@ -72,7 +75,7 @@ async def process_other_answers(message: Message):
             takers[message.from_user.id]['inline_user_kit'] = ''
             await message.answer(text=language_dict['wrong sent data'][takers[message.from_user.id]['language']])
             await message.answer(text=language_dict['next combo do'][takers[message.from_user.id]['language']],
-                                reply_markup=keyboard_digits)
+                                 reply_markup=keyboard_digits)
             await message.answer(text=language_dict['press send'][takers[message.from_user.id]['language']],
                                  reply_markup=usual_clava)
 

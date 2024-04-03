@@ -38,13 +38,13 @@ async def before_start(message:Message):
 async def set_language(message: Message):
     print('смена языка')
     if message.from_user.id in takers.keys():
-        if message.text == 'rus' or message.text == 'кгы':
+        if message.text.lower() == 'rus' or message.text.lower() == 'кгы':
             takers[message.from_user.id]['language'] = 0
             await message.answer('\U0001f1f7\U0001f1fa Игра продолжится на русском языке')
-        elif message.text == 'eng' or message.text == 'утп':
+        elif message.text.lower() == 'eng' or message.text.lower() == 'утп':
             takers[message.from_user.id]['language'] = 1
             await message.answer('\U0001f1ec\U0001f1e7 The Game is carry on in English')
-        elif message.text == 'de' or message.text == 'ву':
+        elif message.text.lower() == 'de' or message.text.lower() == 'ву':
             takers[message.from_user.id]['language'] = 2
             await message.answer('\U0001f1e9\U0001f1ea Das Spiel wird auf Deutsch fortgesetzt')
     else:

@@ -49,14 +49,15 @@ class GAME_WITH_BOT(BaseFilter):
 
 class DATA_IS_DIGIT(BaseFilter):
     async def __call__(self, message: Message):
-        if message.text == 'send':
+        if message.text.lower() == 'send':
             temp_combo_set = set(takers[message.from_user.id]['inline_user_kit'])
-            if takers[message.from_user.id]['inline_user_kit'].isdigit() and len(temp_combo_set) == 4:
+            if (takers[message.from_user.id]['inline_user_kit'].isdigit()
+                    and len(temp_combo_set) == 4
+                    and len(takers[message.from_user.id]['inline_user_kit']) == 4):
                 return True
             return False
         else:
-            temp_combo_set = set(message.text)
-            if message.text.isdigit() and len(temp_combo_set) == 4:
+            if len(message.text) == len(set(message.text)) and len(message.text) == 4 and message.text.isdigit():
                 return True
             return False
 
