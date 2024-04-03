@@ -14,17 +14,16 @@ from external_functions import time_counter
 # Инициализируем роутер уровня модуля
 Comand_router = Router()
 
-
-
 @Comand_router.message(CommandStart(), RESTART())
 async def process_start_command(message: Message):
 
     user_name = message.chat.first_name
     start_time = time.monotonic()
     # Логируем старт Бота
-    std_out_logger.info(f'BOT запущен message = {message.chat.first_name}  time {start_time}')
+    std_out_logger.info(f'\nBOT запущен  \nЮЗЕР -->  {message.chat.first_name}  \nTIME --> {time.ctime()}\n')
+
     await message.answer(text =
-        f'Привет, {message.chat.first_name} !  \U0001F60A\n {start_greeding}',
+        f'Привет, <b>{message.chat.first_name}</b> !  \U0001F60A\n {start_greeding}',
                          reply_markup=start_clava)
     takers[message.from_user.id] = deepcopy(personal_dict)
     takers[message.from_user.id]['user_name'] = user_name
@@ -33,7 +32,7 @@ async def process_start_command(message: Message):
     time.sleep(1)
 @Comand_router.message(PRE_START())
 async def before_start(message:Message):
-    await message.answer(text='Нажми на кнопу старт !',
+    await message.answer(text='Нажми на кнопу <b>start</b> !',
                          reply_markup=pre_start_clava)
 @Comand_router.message(F.text.lower().in_(('rus', 'eng', 'de')))
 async def set_language(message: Message):
@@ -73,6 +72,7 @@ async def process_help_command(message: Message):
 @Comand_router.message(F.text.in_(['Нет, спасибо\nЯ просто посмотреть зашел', '/cancel', 'cancel']))
 async def process_cancel_command(message: Message):
     if message.from_user.id in takers.keys():
+        std_out_logger.info(f"ЮЗЕР    {takers[message.from_user.id]['user_name']} нажал команду /cancel в  {time.ctime()}")
         if takers[message.from_user.id]['in_game']:
             takers[message.from_user.id]['in_game'] = False
             takers[message.from_user.id]['game_list'] = []
@@ -83,6 +83,7 @@ async def process_cancel_command(message: Message):
             takers[message.from_user.id]['user_comb'] = 'setting_data'
             takers[message.from_user.id]['bot_kit'] = 'empty'
             takers[message.from_user.id]['set_SET'] = 'NotSet'
+            takers[message.from_user.id]['inline_user_kit']=''
             await message.answer(
                 language_dict['exit from game'][takers[message.from_user.id]['language']])
             await message.answer_sticker(sticker_dict['process_cancel_command'],
@@ -96,9 +97,7 @@ async def process_cancel_command(message: Message):
 
 @Comand_router.message(F.text.in_(['Выбрать уровень игры', '/set']))
 async def set_game_level(message: Message):
-    print(f'message = {message.text}')
     if message.from_user.id in takers.keys():
-        print(takers)
         if not takers[message.from_user.id]['in_game']:
             await message.answer(text=language_dict['set game level'][takers[message.from_user.id]['language']],
                                 reply_markup=keyboard_game_level)
@@ -117,19 +116,19 @@ async def uznatb_schet(message: Message):
     if message.from_user.id in takers.keys():
         minut, secund = time_counter(takers[message.from_user.id]["start_time"])
         if not takers[message.from_user.id]['in_game']:
-            await message.answer(f"{takers[message.from_user.id]['user_name']} : {takers[message.from_user.id]['wins']}\n"
-                                 f'BOT : {takers[message.from_user.id]["bot_pobeda"]}\n'
-                                 f'Total Game : {takers[message.from_user.id]["total_games"]}'
-                                 f'\nGameTiming : {minut} min, {secund} sec.')
+            await message.answer(f"<b><i>{takers[message.from_user.id]['user_name']} : {takers[message.from_user.id]['wins']}</i></b>\n"
+                                 f'<b><i>BOT : {takers[message.from_user.id]["bot_pobeda"]}</i></b>\n'
+                                 f'<b><i>Total Game : {takers[message.from_user.id]["total_games"]}</i></b>'
+                                 f'\n<b><i>GameTiming : {minut} min, {secund} sec.</i></b>')
             time.sleep(1)
             await  message.answer(text=language_dict['had a look at scores ?'][takers[message.from_user.id]['language']],
                                   reply_markup=start_clava)
         else:
             await message.answer(
-                f"{takers[message.from_user.id]['user_name']} : {takers[message.from_user.id]['wins']}\n"
-                f'BOT : {takers[message.from_user.id]["bot_pobeda"]}\n'
-                f'Total Game : {takers[message.from_user.id]["total_games"]}'
-                f'\nGameTiming : {minut} min, {secund} sec.')
+                f"<b><i>{takers[message.from_user.id]['user_name']} : {takers[message.from_user.id]['wins']}</i></b>\n"
+                f'<b><i>BOT : {takers[message.from_user.id]["bot_pobeda"]}\n</i></b>'
+                f'<b><i>Total Game : {takers[message.from_user.id]["total_games"]}</i></b>'
+                f'\n<b><i>GameTiming : {minut} min, {secund} sec.</i></b>')
             time.sleep(1)
             await  message.answer(
                 text=language_dict['in game querry'][takers[message.from_user.id]['language']])

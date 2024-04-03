@@ -11,13 +11,14 @@ admin_id = env.int('ADMIN_ID')  # Получаем и преобразуем з�
 
 
 # Создаем объекты бота и диспетчера
-bot = Bot(bot_token)
+bot = Bot(bot_token,
+          parse_mode='HTML')
 dp = Dispatcher()
 # Регистриуем роутеры в диспетчере
 dp.include_router(handlers.comand_handlers.Comand_router)
 dp.include_router(handlers.game_handlers.Game_router)
 dp.include_router(handlers.digit_buttons.Digit_router)
-
+dp.include_router(handlers.solo_gaming.Solo_router)
 
 async def set_main_menu(bot: Bot):
 

@@ -1,4 +1,170 @@
-[2024-04-01 23:46:39,881] #INFO     comand_handlers.py:25 - STD_out - BOT запущен message = Ivan  time 1689090.421
-[2024-04-01 23:46:42,758] #INFO     game_handlers.py:28 - STD_out - set_user_set works
-[2024-04-01 23:46:44,442] #INFO     game_handlers.py:57 - STD_out - Юзер Ivan играет 1 игру
-[2024-04-01 23:46:44,443] #INFO     game_handlers.py:61 - STD_out - BOTs COMBO  =  ['9', '4', '0', '8'] 
+[2024-04-03 03:20:03,572] #INFO     comand_handlers.py:23 - STD_out - 
+BOT запущен  
+ЮЗЕР -->  Ivan  
+TIME --> Wed Apr  3 03:20:03 2024
+
+[2024-04-03 03:20:07,256] #INFO     game_handlers.py:90 - STD_out - Юзер Ivan ответил нет !
+[2024-04-03 03:20:14,921] #WARNING  game_handlers.py:74 - FILE_LOGGER - Структура словаря takers =  {6831521683: {'user_name': 'Ivan', 'in_game': True, 'secret_kit': ['7', '4', '6', '3'], 'total_games': 0, 'wins': 0, 'game_list': [], 'bot_list': [], 'user_comb': 'setting_data', 'bot_kit': 'empty', 'bot_win': False, 'bot_pobeda': 0, 'language': 0, 'start_time': 1788294.125, 'schritt': 0, 'set_SET': 'SET', 'Hold_Level': 'WITH SILLY BOT', 'game_level': 'WITH SILLY BOT', 'inline_user_kit': ''}}
+[2024-04-03 03:20:14,922] #INFO     game_handlers.py:75 - STD_out - BOTs NUMBER  =  ['7', '4', '6', '3'] 
+[2024-04-03 03:20:20,049] #INFO     game_handlers.py:112 - STD_out - Ivan  zagadal combo   ['6', '1', '0', '9']
+[2024-04-03 03:20:20,202] #INFO     game_handlers.py:129 - STD_out - 
+ ********  FIRST BOT attempt [['2', '1', '9', '0']]  for  Ivan  ********
+[2024-04-03 03:20:55,112] #INFO     game_handlers.py:226 - ERR_out - for Ivan   список комбининаций бота : att = 7,  [['6', '1', '0', '9'], ['6', '0', '9', '1'], ['6', '9', '1', '0'], ['6', '9', '0', '1'], ['6', '0', '1', '9'], ['6', '1', '9', '0'], ['6', '1', '9', '0']]
+[2024-04-03 03:23:13,927] #INFO     comand_handlers.py:75 - STD_out - ЮЗЕР    Ivan нажал команду /cancel в  Wed Apr  3 03:23:13 2024
+[2024-04-03 03:23:29,840] #INFO     game_handlers.py:81 - STD_out - BOTs NUMBER  =  ['4', '6', '1', '7'] 
+[2024-04-03 03:23:36,157] #INFO     game_handlers.py:112 - STD_out - Ivan  zagadal combo   ['0', '9', '1', '3']
+[2024-04-03 03:23:36,281] #INFO     game_handlers.py:129 - STD_out - 
+ ********  FIRST BOT attempt [['6', '1', '7', '4']]  for  Ivan  ********
+[2024-04-03 03:23:40,761] #INFO     game_handlers.py:226 - ERR_out - for Ivan   список комбининаций бота : att = 9,  [['0', '9', '1', '3'], ['3', '0', '1', '9'], ['3', '1', '9', '0'], ['3', '9', '0', '1'], ['3', '9', '1', '0'], ['3', '1', '0', '9'], ['3', '0', '9', '1'], ['3', '0', '9', '1'], ['6', '1', '7', '4']]
+[2024-04-03 03:24:31,349] #INFO     comand_handlers.py:75 - STD_out - ЮЗЕР    Ivan нажал команду /cancel в  Wed Apr  3 03:24:31 2024
+[2024-04-03 03:24:35,886] #INFO     game_handlers.py:81 - STD_out - BOTs NUMBER  =  ['7', '6', '3', '4'] 
+[2024-04-03 03:24:43,024] #INFO     game_handlers.py:112 - STD_out - Ivan  zagadal combo   ['5', '0', '9', '7']
+[2024-04-03 03:24:43,146] #INFO     game_handlers.py:129 - STD_out - 
+ ********  FIRST BOT attempt [['5', '9', '8', '0']]  for  Ivan  ********
+[2024-04-03 03:24:54,963] #INFO     game_handlers.py:226 - ERR_out - for Ivan   список комбининаций бота : att = 2,  [['5', '0', '9', '7'], ['5', '9', '8', '0']]
+[2024-04-03 03:26:16,256] #INFO     comand_handlers.py:75 - STD_out - ЮЗЕР    Ivan нажал команду /cancel в  Wed Apr  3 03:26:16 2024
+[2024-04-03 03:26:22,592] #INFO     game_handlers.py:81 - STD_out - BOTs NUMBER  =  ['6', '5', '4', '8'] 
+[2024-04-03 03:26:26,362] #INFO     game_handlers.py:112 - STD_out - Ivan  zagadal combo   ['0', '9', '4', '3']
+[2024-04-03 03:26:26,471] #INFO     game_handlers.py:129 - STD_out - 
+ ********  FIRST BOT attempt [['5', '1', '2', '9']]  for  Ivan  ********
+[2024-04-03 03:26:26,472] #INFO     game_handlers.py:171 - ERR_out - temp_game_arr 4 works
+[2024-04-03 03:26:50,662] #INFO     game_handlers.py:226 - ERR_out - for Ivan   список комбининаций бота : att = 9,  [['0', '9', '4', '3'], ['0', '3', '4', '9'], ['0', '4', '3', '9'], ['9', '4', '0', '3'], ['9', '0', '3', '4'], ['9', '3', '4', '0'], ['9', '4', '3', '0'], ['9', '3', '0', '4'], ['5', '1', '2', '9']]
+[2024-04-03 03:27:37,576] #INFO     game_handlers.py:226 - ERR_out - for Ivan   список комбининаций бота : att = 8,  [['0', '9', '4', '3'], ['0', '3', '4', '9'], ['0', '4', '3', '9'], ['9', '4', '0', '3'], ['9', '0', '3', '4'], ['9', '3', '4', '0'], ['9', '4', '3', '0'], ['9', '3', '0', '4']]
+[2024-04-03 03:27:37,577] #ERROR    dispatcher.py:315 - aiogram.event - Cause exception while process update id=317405470 by bot id=7160511951
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\эльдорадо257\PycharmProjects\pythonProject\venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\эльдорадо257\PycharmProjects\pythonProject\venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\эльдорадо257\PycharmProjects\pythonProject\venv\Lib\site-packages\aiogram\dispatcher\middlewares\error.py", line 25, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\эльдорадо257\PycharmProjects\pythonProject\venv\Lib\site-packages\aiogram\dispatcher\middlewares\user_context.py", line 27, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\эльдорадо257\PycharmProjects\pythonProject\venv\Lib\site-packages\aiogram\fsm\middleware.py", line 41, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\эльдорадо257\PycharmProjects\pythonProject\venv\Lib\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\эльдорадо257\PycharmProjects\pythonProject\venv\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\эльдорадо257\PycharmProjects\pythonProject\venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\эльдорадо257\PycharmProjects\pythonProject\venv\Lib\site-packages\aiogram\dispatcher\router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\эльдорадо257\PycharmProjects\pythonProject\venv\Lib\site-packages\aiogram\dispatcher\router.py", line 123, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\эльдорадо257\PycharmProjects\pythonProject\venv\Lib\site-packages\aiogram\dispatcher\router.py", line 156, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\эльдорадо257\PycharmProjects\pythonProject\venv\Lib\site-packages\aiogram\dispatcher\router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\эльдорадо257\PycharmProjects\pythonProject\venv\Lib\site-packages\aiogram\dispatcher\router.py", line 123, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\эльдорадо257\PycharmProjects\pythonProject\venv\Lib\site-packages\aiogram\dispatcher\router.py", line 148, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\эльдорадо257\PycharmProjects\pythonProject\venv\Lib\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\эльдорадо257\PycharmProjects\pythonProject\venv\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "D:\data\Ivan\Programming\OxCowsBot\handlers\game_handlers.py", line 243, in gaming_with_bot
+    temp_res = seek_bools(takers[message.from_user.id]['secret_kit'], temp_res)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\data\Ivan\Programming\OxCowsBot\external_functions\external_funktions.py", line 32, in seek_bools
+    elif num in bot_tally and num == bot_tally[k]:
+                                     ~~~~~~~~~^^^
+IndexError: list index out of range
+[2024-04-03 03:27:56,939] #INFO     game_handlers.py:226 - ERR_out - for Ivan   список комбининаций бота : att = 7,  [['0', '9', '4', '3'], ['0', '3', '4', '9'], ['0', '4', '3', '9'], ['9', '4', '0', '3'], ['9', '0', '3', '4'], ['9', '3', '4', '0'], ['9', '4', '3', '0']]
+[2024-04-03 03:27:56,940] #ERROR    dispatcher.py:315 - aiogram.event - Cause exception while process update id=317405471 by bot id=7160511951
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\эльдорадо257\PycharmProjects\pythonProject\venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\эльдорадо257\PycharmProjects\pythonProject\venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\эльдорадо257\PycharmProjects\pythonProject\venv\Lib\site-packages\aiogram\dispatcher\middlewares\error.py", line 25, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\эльдорадо257\PycharmProjects\pythonProject\venv\Lib\site-packages\aiogram\dispatcher\middlewares\user_context.py", line 27, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\эльдорадо257\PycharmProjects\pythonProject\venv\Lib\site-packages\aiogram\fsm\middleware.py", line 41, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\эльдорадо257\PycharmProjects\pythonProject\venv\Lib\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\эльдорадо257\PycharmProjects\pythonProject\venv\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\эльдорадо257\PycharmProjects\pythonProject\venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\эльдорадо257\PycharmProjects\pythonProject\venv\Lib\site-packages\aiogram\dispatcher\router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\эльдорадо257\PycharmProjects\pythonProject\venv\Lib\site-packages\aiogram\dispatcher\router.py", line 123, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\эльдорадо257\PycharmProjects\pythonProject\venv\Lib\site-packages\aiogram\dispatcher\router.py", line 156, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\эльдорадо257\PycharmProjects\pythonProject\venv\Lib\site-packages\aiogram\dispatcher\router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\эльдорадо257\PycharmProjects\pythonProject\venv\Lib\site-packages\aiogram\dispatcher\router.py", line 123, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\эльдорадо257\PycharmProjects\pythonProject\venv\Lib\site-packages\aiogram\dispatcher\router.py", line 148, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\эльдорадо257\PycharmProjects\pythonProject\venv\Lib\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\эльдорадо257\PycharmProjects\pythonProject\venv\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "D:\data\Ivan\Programming\OxCowsBot\handlers\game_handlers.py", line 243, in gaming_with_bot
+    temp_res = seek_bools(takers[message.from_user.id]['secret_kit'], temp_res)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\data\Ivan\Programming\OxCowsBot\external_functions\external_funktions.py", line 32, in seek_bools
+    elif num in bot_tally and num == bot_tally[k]:
+                                     ~~~~~~~~~^^^
+IndexError: list index out of range
+[2024-04-03 03:28:21,947] #INFO     game_handlers.py:226 - ERR_out - for Ivan   список комбининаций бота : att = 6,  [['0', '9', '4', '3'], ['0', '3', '4', '9'], ['0', '4', '3', '9'], ['9', '4', '0', '3'], ['9', '0', '3', '4'], ['9', '3', '4', '0']]
+[2024-04-03 03:29:09,369] #INFO     game_handlers.py:226 - ERR_out - for Ivan   список комбининаций бота : att = 5,  [['0', '9', '4', '3'], ['0', '3', '4', '9'], ['0', '4', '3', '9'], ['9', '4', '0', '3'], ['9', '0', '3', '4']]
+[2024-04-03 03:29:41,121] #INFO     game_handlers.py:226 - ERR_out - for Ivan   список комбининаций бота : att = 4,  [['0', '9', '4', '3'], ['0', '3', '4', '9'], ['0', '4', '3', '9'], ['9', '4', '0', '3']]
+[2024-04-03 03:29:41,121] #INFO     game_handlers.py:264 - STD_out - Ivan  - Выигрыш
+[2024-04-03 03:30:11,124] #INFO     comand_handlers.py:75 - STD_out - ЮЗЕР    Ivan нажал команду /cancel в  Wed Apr  3 03:30:11 2024
+[2024-04-03 03:30:13,812] #INFO     game_handlers.py:81 - STD_out - BOTs NUMBER  =  ['9', '7', '4', '2'] 
+[2024-04-03 03:30:25,183] #INFO     comand_handlers.py:75 - STD_out - ЮЗЕР    Ivan нажал команду /cancel в  Wed Apr  3 03:30:25 2024
+[2024-04-03 03:30:31,122] #INFO     comand_handlers.py:75 - STD_out - ЮЗЕР    Ivan нажал команду /cancel в  Wed Apr  3 03:30:31 2024
+[2024-04-03 03:30:35,044] #INFO     comand_handlers.py:75 - STD_out - ЮЗЕР    Ivan нажал команду /cancel в  Wed Apr  3 03:30:35 2024
+[2024-04-03 03:30:43,701] #INFO     game_handlers.py:59 - ERR_out - 
+Юзер Ivan играет 2 игру
+[2024-04-03 03:30:43,702] #INFO     game_handlers.py:63 - STD_out - BOTs COMBO  =  ['9', '7', '1', '2'] 
+[2024-04-03 03:30:56,106] #INFO     solo_gaming.py:17 - STD_out - 
+ ********  Ivan, gaming! ********
+[2024-04-03 03:30:56,107] #INFO     solo_gaming.py:27 - STD_out - Ivan ход 1, совпадения = ['Ox', 'Ox', 'Ox', 'Ox']
+[2024-04-03 03:31:00,896] #INFO     game_handlers.py:90 - STD_out - Юзер Ivan ответил нет !
+[2024-04-03 03:32:30,050] #INFO     game_handlers.py:81 - STD_out - BOTs NUMBER  =  ['4', '2', '9', '8'] 
+[2024-04-03 03:32:33,984] #INFO     game_handlers.py:112 - STD_out - Ivan  zagadal combo   ['8', '5', '3', '1']
+[2024-04-03 03:32:34,154] #INFO     game_handlers.py:129 - STD_out - 
+ ********  FIRST BOT attempt [['0', '6', '1', '3']]  for  Ivan  ********
+[2024-04-03 03:32:40,772] #INFO     game_handlers.py:226 - ERR_out - for Ivan   список комбининаций бота : att = 9,  [['8', '5', '3', '1'], ['8', '3', '1', '5'], ['8', '3', '5', '1'], ['8', '1', '5', '3'], ['8', '5', '1', '3'], ['3', '5', '8', '1'], ['3', '8', '1', '5'], ['3', '1', '5', '8'], ['0', '6', '1', '3']]

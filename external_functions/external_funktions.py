@@ -62,11 +62,9 @@ def verify_bools_position(bot_kit: list, secret_kit: list, bot_test_combination:
                  [b, c, d, a], [b, a, c, d], [b, d, a, c], [b, a, d, c], [b, c, a, d], [b, d, c, a],
                  [c, d, a, b], [c, a, d, b], [c, b, d, a], [c, b, a, d], [c, d, b, a], [c, a, b, d],
                  [d, b, a, c], [d, c, b, a], [d, a, b, c], [d, c, a, b], [d, b, c, a], [d, a, c, b])
-    func_counter = -1
     for spisok in super_tup:
-        func_counter += 1
-        bot_test_combination.append(spisok)  # Ну и аппендим сразу это в список комбинаций
-        # print('spisok into funk ',bot_test_combination)
+        if spisok not in bot_kit:
+            bot_test_combination.append(spisok)  # Ну и аппендим сразу это в список комбинаций, если его там ещё нет
         if spisok == secret_kit:
             return bot_test_combination
     return "something goes wrong"
@@ -108,3 +106,9 @@ def format_string(inline: str) -> str:
     empty_space = empty_space - dlina_inline
     returned_stroka = inline + "*" * empty_space
     return returned_stroka
+
+def append_kit(bot_kit: list, bot_test_combination:list):
+    if bot_kit not in bot_test_combination:
+        bot_test_combination.append(bot_kit)
+        return bot_test_combination
+    return bot_test_combination

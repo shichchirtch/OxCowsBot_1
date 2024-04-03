@@ -8,12 +8,14 @@ from keyboards import *
 from config import takers, tallys_str_bot, Four_bools
 from aiogram.types import Message, ReplyKeyboardRemove
 import time
+from copy import deepcopy
 
 Game_router = Router()
 
+
 @Game_router.message(F.content_type != ContentType.TEXT)
 async def process_notTEXT_answers(message: Message):
-    std_out_logger.info("game handlers block works...")
+    std_err_logger.info(f"{takers[message.from_user.id]['user_name']}   notTEXT works...")
     if takers[message.from_user.id]['in_game']:
         await message.answer(language_dict['wrong sent data'][takers[message.from_user.id]['language']])
     else:
@@ -25,23 +27,23 @@ async def process_notTEXT_answers(message: Message):
 
 @Game_router.message(SET_USER_SET())
 async def set_user_set(message: Message):  # Здесь юзер устанавливает уровень игры
-    std_out_logger.info('set_user_set works')
+    # std_out_logger.info('set_user_set works')
     if message.text == 'Начать игру':
         takers[message.from_user.id]['game_level'] = 'SOLO'
         takers[message.from_user.id]['Hold_Level'] = 'SOLO'
         takers[message.from_user.id]['set_SET'] = 'SET'
-        await message.answer(text=language_dict['choosing level is'][takers[message.from_user.id]['language']] +
-                                  takers[message.from_user.id]['game_level'] + " \n" +
-                                  language_dict['game start ?'][takers[message.from_user.id]['language']],
+        await message.answer(text=f"{language_dict['choosing level is'][takers[message.from_user.id]['language']]}"
+                                  f"<b>{takers[message.from_user.id]['game_level']}</b>   \n"
+                                  f"{language_dict['game start ?'][takers[message.from_user.id]['language']]}",
                              reply_markup=keyboard_yes_no)
     else:
         if not takers[message.from_user.id]['in_game']:
             takers[message.from_user.id]['game_level'] = message.text
             takers[message.from_user.id]['Hold_Level'] = message.text
             takers[message.from_user.id]['set_SET'] = 'SET'
-            await message.answer(text=language_dict['choosing level is'][takers[message.from_user.id]['language']] +
-                                      takers[message.from_user.id]['game_level'] + " \n" +
-                                      language_dict['game start ?'][takers[message.from_user.id]['language']],
+            await message.answer(text=f"{language_dict['choosing level is'][takers[message.from_user.id]['language']]}"
+                                      f"<b>{takers[message.from_user.id]['game_level']}</b>  \n"
+                                      f"{language_dict['game start ?'][takers[message.from_user.id]['language']]}",
                                  reply_markup=keyboard_yes_no)
         else:
             await message.answer(
@@ -54,8 +56,8 @@ async def process_positive_answer(message: Message):
     await message.answer_sticker(sticker_dict['rocket bull'])
     takers[message.from_user.id]['in_game'] = True
     if takers[message.from_user.id]['Hold_Level'] == 'SOLO':
-        std_out_logger.info(
-            f'Юзер {takers[message.from_user.id]["user_name"]} играет {takers[message.from_user.id]["total_games"] + 1} игру')
+        std_err_logger.info(
+            f'\nЮзер {takers[message.from_user.id]["user_name"]} играет {takers[message.from_user.id]["total_games"] + 1} игру')
 
         takers[message.from_user.id]["secret_kit"] = get_secret_kit(tallys_str_bot)
         std_out_logger.info(f'BOTs COMBO  =  {takers[message.from_user.id]["secret_kit"]} ')
@@ -76,7 +78,6 @@ async def process_positive_answer(message: Message):
 
     elif takers[message.from_user.id]['Hold_Level'] == 'WITH SMART BOT':
         takers[message.from_user.id]["secret_kit"] = get_secret_kit(tallys_str_bot)
-        print(f'Структура словаря takers =  {takers}')
         std_out_logger.info(f'BOTs NUMBER  =  {takers[message.from_user.id]["secret_kit"]} ')
         await message.answer(language_dict['bot_ask_user_combo'][takers[message.from_user.id]['language']],
                              reply_markup=ReplyKeyboardRemove())
@@ -104,34 +105,38 @@ async def process_negative_answer(message: Message):
 
 @Game_router.message(DATA_IS_DIGIT(), GAME_WITH_BOT(), EMPTY_BOT_LIST(), NOT_USER_COMBO(), INLINE_FILTER())
 async def set_user_combo(message: Message):
-    """Этот хэндлер срабатывает, только тогда, когда бот тоже  будет отгадывать комбо юзера"""
-    print('Этот хэндлер должен срабатывать тольок один раз за игру с ботом !')
+    """Этот хэндлер срабатывает, только тогда, когда бот   Т О Ж Е     будет отгадывать комбо юзера
+        Этот хэндлер должен срабатывать только один раз за игру с ботом !"""
+
     user_combo = list(message.text)
-    print(f'print works str 115 user combo {user_combo}')
+    std_out_logger.info(f'{takers[message.from_user.id]["user_name"]}  zagadal combo   {user_combo}')
     takers[message.from_user.id]["user_comb"] = user_combo
     await message.answer(text=language_dict['after_user_zagadal_combo'][takers[message.from_user.id]['language']],
                          reply_markup=keyboard_digits)
     await message.answer(text=language_dict['press send'][takers[message.from_user.id]['language']],
                          reply_markup=usual_clava)
 
-
     final_res = takers[message.from_user.id]["bot_list"]  # сюда будем аппендить все комбинации ответов бота
-    std_out_logger.info(f'\n NOT PRINT********  {takers[message.from_user.id]["user_name"]}, gaming with BOT! ********')
 
     # Что мы имеем на старте
     start_kit = user_combo  # Уже введена и отловлена хэндлером ! ! !
 
-    first_bot_data = get_secret_kit(tallys_str_bot)  #  Так бот получает комбинацию, с которой начинает угадывать комбо юзера
-    print(f'126 first_bot_data =  {first_bot_data}')
+    first_bot_data = get_secret_kit(
+        tallys_str_bot)  # Так бот получает комбинацию, с которой начинает угадывать комбо юзера
+    first_bot_data_copy = deepcopy(first_bot_data)
     final_res.append(first_bot_data)  # Аппендим первую попытку
+
+    std_out_logger.info(
+        f'\n ********  FIRST BOT attempt {takers[message.from_user.id]["bot_list"]}  for  {takers[message.from_user.id]["user_name"]}  ********')
     rest_bot_chisla_arr = list(set(tallys_str_bot).symmetric_difference(set(first_bot_data)))  # Это набор оставшихся
-                                                                                                    # неиспользованными при построении первой комбинации ботом чисел
+    # неиспользованными при построении первой комбинации ботом чисел
     temp_game_arr = seek_bools(start_kit, first_bot_data)
 
     if not temp_game_arr:  # То есть  ни коров ни быков не попало к боту
-        std_err_logger.info('NOT temp_game_arr works')
+        # std_err_logger.info('NOT temp_game_arr works')    # Раскомментируовать логгер, при необходимости !
         bot_data = rest_bot_chisla_arr[:4]  # Новый набор для бота
-        final_res.append(bot_data)  # Ну и аппендим сразу вторую попытку бота угадать в список комбинаций
+        final_res = append_kit(bot_data,
+                               final_res)  # Ну и аппендим сразу вторую попытку бота угадать в список комбинаций
         temp_game_arr = seek_bools(start_kit, bot_data)
 
         if len(temp_game_arr) == 4:  # если 4 коровы \ быка
@@ -139,7 +144,7 @@ async def set_user_combo(message: Message):
 
     ########################################################  len(temp_game_arr) == 1 ########################################
     elif len(temp_game_arr) == 1:  # Только одна корова или бык
-        std_err_logger.info('temp_game_arr 1 works')
+        # std_err_logger.info('temp_game_arr 1 works')  # Раскомментируовать логгер, при необходимости !
         temp_bot_data = first_bot_data.copy()
 
         bot_data = rest_bot_chisla_arr[:4]  # Здесь мы перезаписываем значение bot_data на 4 из 6 оставшихся в наборе
@@ -150,7 +155,7 @@ async def set_user_combo(message: Message):
 
         if len(temp_game_arr) == 2:  # Может быть 1, 2 или 3 совпадения
             new_arr = verify_when_two_cows(bot_data, start_kit)
-            final_res.append(new_arr)  # Ну и аппендим сразу это в список комбинаций
+            final_res = append_kit(new_arr, final_res)  # Ну и аппендим сразу это в список комбинаций
             final_res = verify_bools_position(new_arr, start_kit, final_res)  # расставляем быков по местам
 
         elif len(temp_game_arr) == 3:  # Найдём первым делом лишнюю цифру
@@ -161,9 +166,9 @@ async def set_user_combo(message: Message):
             last_cow = verify_last_cow(temp_bot_data, start_kit)
             #  Заменим в bot_data лишнюю цифру
             bot_data[indx] = last_cow
-            final_res.append(bot_data)  # Ну и аппендим сразу это в список комбинаций
+            final_res = append_kit(bot_data, final_res)  # Ну и аппендим сразу это в список комбинаций
             # Вызовем функцию расставления коров по местам
-            std_err_logger.info('temp_game_arr 4 works')
+            # std_err_logger.info('temp_game_arr 4 works')  # Раскомментируовать логгер, при необходимости !
             final_res = verify_bools_position(bot_data, start_kit, final_res)
 
         elif len(temp_game_arr) == 1:  # Значит оставшиеся 2 цифры точно в нашем наборе !
@@ -172,98 +177,52 @@ async def set_user_combo(message: Message):
             forth_cow = verify_last_cow(bot_data, start_kit)
             # Дальше собирем их в один спиоск
             fourth_coows_list = [e, f, third_cow, forth_cow]
-            final_res.append(fourth_coows_list)  # Ну и аппендим сразу это в список комбинаций
+            final_res = append_kit(fourth_coows_list, final_res)  # Ну и аппендим сразу это в список комбинаций
             # Дальше Вызовем функцию расставления коров по местам
             final_res = verify_bools_position(fourth_coows_list, start_kit, final_res)
 
     elif len(temp_game_arr) == 2:
-        std_err_logger.info('temp_game_arr 2 works')
+        # std_err_logger.info('temp_game_arr 2 works')  #  Раскомментируовать логгер, при необходимости !
         temp_arr = verify_when_two_cows(first_bot_data, start_kit)
-        final_res.append(temp_arr)  # Ну и аппендим сразу это в список комбинаций
+        final_res = append_kit(temp_arr, final_res)  # Ну и аппендим сразу это в список комбинаций
         # Дальше Вызовем функцию расставления коров по местам
         final_res = verify_bools_position(temp_arr, start_kit, final_res)
 
     elif len(temp_game_arr) == 3:
-        std_err_logger.info('temp_game_arr 3 works')
+        # std_err_logger.info('temp_game_arr 3 works')  # Раскомментируовать логгер, при необходимости !
         # Находим последнюю корову в остаtке набора цифр
         last_cow = find_one_cow_in_6_numbers(rest_bot_chisla_arr, start_kit)
-        print('last_cow = ', last_cow)
         for k, x in enumerate(first_bot_data):
             if x not in start_kit:
                 first_bot_data[k] = last_cow
-        final_res.append(first_bot_data)  # Ну и аппендим сразу это в список комбинаций
+        final_res = append_kit(first_bot_data, final_res)  # Ну и аппендим сразу это в список комбинаций
         # Дальше Вызовем функцию расставления коров по местам
         final_res = verify_bools_position(first_bot_data, start_kit, final_res)
 
     elif len(temp_game_arr) == 4:
         final_res = verify_bools_position(first_bot_data, start_kit, final_res)
-
-    # print(f"202 Список попыток бота {final_res}")
-    # print('PREREVERS PRINT ******************************************************************')
     final_res = final_res[::-1]  # Делаю реверс списка, чтобы можно было удалять элементы с конца методом рор()
-    std_out_logger.info(f'AFTER REWERS 210 user combo = {user_combo}')
-    print('reversw попыток бота', final_res, 'att = ', len(final_res))
 
     if takers[message.from_user.id]["game_level"] == "WITH SMART BOT":
         if len(final_res) > 8:
-            final_res = [final_res[0]] + final_res[1:-1:2]
-            takers[message.from_user.id]["bot_list"] = final_res[:9]
-            # print(f'221 cutting_fin_res =  {final_res}') # Вывод обрезанного списка попыток
+            final_res = [final_res][0] + final_res[1:-1:2]
+
+            takers[message.from_user.id]["bot_list"] = final_res[:8] + [first_bot_data_copy]
+
         else:
+
+            final_res = final_res[:-2] + [first_bot_data_copy]
             takers[message.from_user.id]["bot_list"] = final_res
     else:
         takers[message.from_user.id]["bot_list"] = final_res
 
-@Game_router.message(SOLO_GAME_PROCESS(), DATA_IS_DIGIT())
-async def solo_gaming(message: Message):
-    """В хэндлер попадают комбинации юзера в режиме SOLO"""
-    userID = message.from_user.id
-    std_out_logger.info(f'\n ********  {takers[message.from_user.id]["user_name"]}, gaming! ********')
-    user_attempt_guess_botCombo(takers, userID, message)
-    if message.text == 'send':
-        sending_user_combo = list(takers[message.from_user.id]['inline_user_kit'])  # Если Юзер ввел комбинацию инлайн клавиатурой
-    else:
-        sending_user_combo = list(message.text)  # Вот здесь присваиваем значение комбинации введенной юзером
 
-    takers[message.from_user.id]["game_list"].append(sending_user_combo)
-    temp_res = seek_bools(takers[message.from_user.id]['secret_kit'], sending_user_combo)
-
-    std_out_logger.info(f"{takers[message.from_user.id]['user_name']} temp_res = {temp_res}")
-
-    if temp_res != Four_bools:
-        current_data = " ".join(list(takers[message.from_user.id]['inline_user_kit']))
-        stroka = (f"{language_dict['your combo'][takers[message.from_user.id]['language']]} {current_data}\n"
-                  f"{takers[message.from_user.id]['schritt']} Ход  {temp_res.count('Ox')} Bulls, {temp_res.count('Cow')} Cows")
-        await message.reply(stroka)
-        time.sleep(1)
-
-        await message.answer(language_dict["next combo do"][takers[message.from_user.id]["language"]],
-                             reply_markup=keyboard_digits)
-        await message.answer(text=language_dict['press send'][takers[message.from_user.id]['language']],
-                             reply_markup=usual_clava)
-        takers[message.from_user.id]['inline_user_kit'] = ''
-    else:
-        stroka = (f"{takers[message.from_user.id]['schritt']}  Ход  {temp_res.count('Ox')} Bools !!! \n")
-        takers[message.from_user.id]['wins'] += 1
-        pip_print = " ".join(takers[message.from_user.id]["secret_kit"])
-        time.sleep(1)
-        await message.answer(stroka)
-        await message.answer_sticker(sticker_dict['win 4 bools'])
-        await message.answer(language_dict['wow'][takers[message.from_user.id]['language']] +
-                             takers[message.from_user.id]['user_name'] +
-                             language_dict['user guessed'][takers[message.from_user.id]['language']] +
-                             str(pip_print))
-        time.sleep(1)
-
-        reset_user_dict_after_finish(takers, userID)  # Здесь происходит перезапись значений в словаре юзера
-        await message.answer(text=language_dict['play new game after user wins'][
-            takers[message.from_user.id]['language']],
-                             reply_markup=keyboard_after_finish)
 @Game_router.message(BOT_USER_GAMING(), DATA_IS_DIGIT())
 async def gaming_with_bot(message: Message):
     """Сюда попадают комбинации, которые вводит юзер"""
-    print('test g with bot')
-    print('bot_list = ',takers[message.from_user.id]['bot_list'])
+
+    std_err_logger.info(
+        f'for {takers[message.from_user.id]["user_name"]}   список комбининаций бота : att = {len(takers[message.from_user.id]["bot_list"])},  {takers[message.from_user.id]["bot_list"]}')
     userID = message.from_user.id
 
     final_res = takers[message.from_user.id]['bot_list']
@@ -277,13 +236,14 @@ async def gaming_with_bot(message: Message):
     takers[message.from_user.id]["game_list"].append(temp_res)
 
     if temp_game_arr != Four_bools:
-            # USER PART
+        # USER PART
         user_attempt_guess_botCombo(takers, userID, message)  # Делаем необходимые преoбразования со словарём игрока
         temp_res = seek_bools(takers[message.from_user.id]['secret_kit'], temp_res)
         if temp_res != Four_bools:
             current_data = " ".join(list(takers[message.from_user.id]['inline_user_kit']))
-            stroka = (f"{language_dict['your combo'][takers[message.from_user.id]['language']]} {current_data}\n"
-                      f"{takers[message.from_user.id]['schritt']} Ход  {temp_res.count('Ox')} Bulls, {temp_res.count('Cow')} Cows")
+            stroka = (f"{language_dict['your combo'][takers[message.from_user.id]['language']]} <b>{current_data}</b>\n"
+                      f"<b>{takers[message.from_user.id]['schritt']}</b> Ход  "
+                      f"<b>{temp_res.count('Ox')}</b> Bulls, <b>{temp_res.count('Cow')}</b> Cows")
             await message.reply(stroka)
             time.sleep(1)
 
@@ -308,19 +268,20 @@ async def gaming_with_bot(message: Message):
             await message.answer(stroka)
             await message.answer_sticker(sticker_dict['win 4 bools'])
             await message.answer(language_dict['wow'][takers[message.from_user.id]['language']] +
-                                     takers[message.from_user.id]['user_name'] +
-                                     language_dict['user guessed'][takers[message.from_user.id]['language']] +
-                                     (pip_print))
+                                 takers[message.from_user.id]['user_name'] +
+                                 language_dict['user guessed'][takers[message.from_user.id]['language']] +
+                                 (pip_print))
             time.sleep(1)
-            takers[message.from_user.id]['inline_user_kit'] = '' # обнуляем строку inline_user_kit
+            takers[message.from_user.id]['inline_user_kit'] = ''  # обнуляем строку inline_user_kit
             reset_user_dict_after_finish(takers, userID)  # Здесь происходит перезапись значений в словаре юзера
             await message.answer(text=language_dict['play new game after user wins'][
                 takers[message.from_user.id]['language']],
-                                     reply_markup=keyboard_after_finish)
+                                 reply_markup=keyboard_after_finish)
 
     else:
-        bot_win_stroka = (language_dict['bot ugadal'][takers[message.from_user.id]['language']]+f"{' '.join(processing_combo)}\n"
-                          + language_dict['bots COMBO was'][takers[message.from_user.id]['language']]+
+        bot_win_stroka = (language_dict['bot ugadal'][
+                              takers[message.from_user.id]['language']] + f"{' '.join(processing_combo)}\n"
+                          + language_dict['bots COMBO was'][takers[message.from_user.id]['language']] +
                           f"{' '.join(takers[message.from_user.id]['secret_kit'])}\n")
         takers[message.from_user.id]['bot_pobeda'] += 1
 
@@ -331,26 +292,3 @@ async def gaming_with_bot(message: Message):
         await message.answer(text=f"Сыграем ещё ?",
                              reply_markup=keyboard_after_finish)
         reset_user_dict_after_finish(takers, userID)
-
-@Game_router.message()
-async def process_other_answers(message: Message):
-    if not message.from_user.id in takers:
-        await message.answer(language_dict['start chat'][takers[message.from_user.id]['language']])
-    if takers[message.from_user.id]['in_game']:
-        if takers[message.from_user.id]['user_comb']== 'setting_data':
-            await message.answer(text=language_dict['not repeat'][takers[message.from_user.id]['language']])
-        else:
-            takers[message.from_user.id]['inline_user_kit'] = ''
-            await message.answer(text=language_dict['wrong sent data'][takers[message.from_user.id]['language']])
-            await message.answer(text=language_dict['next combo do'][takers[message.from_user.id]['language']],
-                                reply_markup=keyboard_digits)
-            await message.answer(text=language_dict['press send'][takers[message.from_user.id]['language']],
-                                 reply_markup=usual_clava)
-
-    else:
-        if message.text == ('/start'):
-            await message.answer(language_dict['restart'][takers[message.from_user.id]['language']])
-        else:
-            await message.answer(language_dict['silly bot'][takers[message.from_user.id]['language']])
-            await message.answer_sticker(sticker_dict['silly bot'],
-                                         reply_markup=start_clava)

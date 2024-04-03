@@ -14,7 +14,7 @@ async def button_1_press(callback: CallbackQuery):
         takers[callback.from_user.id]['inline_user_kit']+='1'
         pattern = format_string(takers[callback.from_user.id]["inline_user_kit"])
         await callback.message.edit_text(
-            text= '\U0001f928'+' '*19+f'Вы ввели  {pattern}'+' '*19+'\u27A1\uFE0F',
+            text= '\U0001f928'+' '*19+f'Вы ввели  <b>{pattern}</b>'+' '*19+'\u27A1\uFE0F',
             reply_markup=callback.message.reply_markup)
     await callback.answer('*****')
 
@@ -27,7 +27,7 @@ async def button_2_press(callback: CallbackQuery):
         takers[callback.from_user.id]['inline_user_kit']+='2'
         pattern = format_string(takers[callback.from_user.id]["inline_user_kit"])
         await callback.message.edit_text(
-            text='\U0001f928' + ' ' * 19 + f'Вы ввели  {pattern}' + ' ' * 19 + '\u27A1\uFE0F',
+            text='\U0001f928' + ' ' * 19 + f'Вы ввели  <b>{pattern}</b>' + ' ' * 19 + '\u27A1\uFE0F',
             reply_markup=callback.message.reply_markup)
     await callback.answer('*****')
 
@@ -40,7 +40,7 @@ async def button_3_press(callback: CallbackQuery):
         takers[callback.from_user.id]['inline_user_kit']+='3'
         pattern = format_string(takers[callback.from_user.id]["inline_user_kit"])
         await callback.message.edit_text(
-            text='\U0001f928' + ' ' * 19 + f'Вы ввели  {pattern}' + ' ' * 19 + '\u27A1\uFE0F',
+            text='\U0001f928' + ' ' * 19 + f'Вы ввели  <b>{pattern}</b>' + ' ' * 19 + '\u27A1\uFE0F',
             reply_markup=callback.message.reply_markup)
     await callback.answer('*****')
 
@@ -54,7 +54,7 @@ async def button_4_press(callback: CallbackQuery):
         takers[callback.from_user.id]['inline_user_kit']+='4'
         pattern = format_string(takers[callback.from_user.id]["inline_user_kit"])
         await callback.message.edit_text(
-            text='\U0001f928' + ' ' * 19 + f'Вы ввели  {pattern}' + ' ' * 19 + '\u27A1\uFE0F',
+            text='\U0001f928' + ' ' * 19 + f'Вы ввели  <b>{pattern}</b>' + ' ' * 19 + '\u27A1\uFE0F',
             reply_markup=callback.message.reply_markup)
     await callback.answer('*****')
 
@@ -67,7 +67,7 @@ async def button_5_press(callback: CallbackQuery):
         takers[callback.from_user.id]['inline_user_kit']+='5'
         pattern = format_string(takers[callback.from_user.id]["inline_user_kit"])
         await callback.message.edit_text(
-            text='\U0001f928' + ' ' * 19 + f'Вы ввели  {pattern}' + ' ' * 19 + '\u27A1\uFE0F',
+            text='\U0001f928' + ' ' * 19 + f'Вы ввели  <b>{pattern}</b>' + ' ' * 19 + '\u27A1\uFE0F',
             reply_markup=callback.message.reply_markup)
     await callback.answer('*****')
 
@@ -81,7 +81,7 @@ async def button_6_press(callback: CallbackQuery):
         takers[callback.from_user.id]['inline_user_kit']+='6'
         pattern = format_string(takers[callback.from_user.id]["inline_user_kit"])
         await callback.message.edit_text(
-            text='\U0001f928' + ' ' * 19 + f'Вы ввели  {pattern}' + ' ' * 19 + '\u27A1\uFE0F',
+            text='\U0001f928' + ' ' * 19 + f'Вы ввели  <b>{pattern}</b>' + ' ' * 19 + '\u27A1\uFE0F',
             reply_markup=callback.message.reply_markup)
     await callback.answer('*****')
 
@@ -94,7 +94,7 @@ async def button_7_press(callback: CallbackQuery):
         takers[callback.from_user.id]['inline_user_kit']+='7'
         pattern = format_string(takers[callback.from_user.id]["inline_user_kit"])
         await callback.message.edit_text(
-            text='\U0001f928' + ' ' * 19 + f'Вы ввели  {pattern}' + ' ' * 19 + '\u27A1\uFE0F',
+            text='\U0001f928' + ' ' * 19 + f'Вы ввели  <b>{pattern}</b>' + ' ' * 19 + '\u27A1\uFE0F',
             reply_markup=callback.message.reply_markup)
     await callback.answer('*****')
 
@@ -107,7 +107,7 @@ async def button_8_press(callback: CallbackQuery):
         takers[callback.from_user.id]['inline_user_kit']+='8'
         pattern = format_string(takers[callback.from_user.id]["inline_user_kit"])
         await callback.message.edit_text(
-            text='\U0001f928' + ' ' * 19 + f'Вы ввели  {pattern}' + ' ' * 19 + '\u27A1\uFE0F',
+            text='\U0001f928' + ' ' * 19 + f'Вы ввели  <b>{pattern}</b>' + ' ' * 19 + '\u27A1\uFE0F',
             reply_markup=callback.message.reply_markup)
     await callback.answer('*****')
 
@@ -120,7 +120,7 @@ async def button_9_press(callback: CallbackQuery):
         takers[callback.from_user.id]['inline_user_kit']+='9'
         pattern = format_string(takers[callback.from_user.id]["inline_user_kit"])
         await callback.message.edit_text(
-            text='\U0001f928' + ' ' * 19 + f'Вы ввели  {pattern}' + ' ' * 19 + '\u27A1\uFE0F',
+            text='\U0001f928' + ' ' * 19 + f'Вы ввели  <b>{pattern}</b>' + ' ' * 19 + '\u27A1\uFE0F',
             reply_markup=callback.message.reply_markup)
     await callback.answer('*****')
 
@@ -133,7 +133,7 @@ async def button_0_press(callback: CallbackQuery):
         takers[callback.from_user.id]['inline_user_kit']+='0'
         pattern = format_string(takers[callback.from_user.id]["inline_user_kit"])
         await callback.message.edit_text(
-            text='\U0001f928' + ' ' * 19 + f'Вы ввели  {pattern}' + ' ' * 19 + '\u27A1\uFE0F',
+            text='\U0001f928' + ' ' * 19 + f'Вы ввели  <b>{pattern}</b>' + ' ' * 19 + '\u27A1\uFE0F',
             reply_markup=callback.message.reply_markup)
     await callback.answer('*****')
 
@@ -143,26 +143,24 @@ async def button_0_press(callback: CallbackQuery):
 @Digit_router.callback_query(F.data == 'del_pressed')
 async def button_del_press(callback: CallbackQuery):
     await callback.answer()
-
     if callback.message.text != 'Удалить предыдущий символ':
         if len(takers[callback.from_user.id]['inline_user_kit'])>1:
             takers[callback.from_user.id]['inline_user_kit']=takers[callback.from_user.id]['inline_user_kit'][:-1]
-            # print(f"modify data =  {users[callback.from_user.id]['user_data']}")
             await callback.message.edit_text(
-                text=f"                  User_data is                  {takers[callback.from_user.id]['inline_user_kit']}",
+                text=f"\u27A1\uFE0F           Введите  ваше комбо   {takers[callback.from_user.id]['inline_user_kit']}      \U0001f535",
                 reply_markup=callback.message.reply_markup)
         elif len(takers[callback.from_user.id]['inline_user_kit']) == 1:
             takers[callback.from_user.id]['inline_user_kit']=''
             await callback.message.edit_text(
-                text=f"          Введите  комбо  заново        {takers[callback.from_user.id]['inline_user_kit']}",
+                text=f"\u27A1\uFE0F         Введите  комбо  заново   <b>{takers[callback.from_user.id]['inline_user_kit']}</b>    \U0001f535",
                 reply_markup=callback.message.reply_markup)
         elif len(takers[callback.from_user.id]['inline_user_kit'])==0:
             await callback.message.edit_text(
-                text=f'                         Удалять нечего)))                   \U0001f937\u200D\u2642\uFE0F',
+                text=f'\u21AA\uFE0F                   Удалять нечего)))            \U0001f937\u200D\u2642\uFE0F',
                 reply_markup=callback.message.reply_markup)
     await callback.answer('*****')
 
-    print('inline_user_kit last tilly del = ',takers[callback.from_user.id]['inline_user_kit'])
+    # print('inline_user_kit last tilly del = ',takers[callback.from_user.id]['inline_user_kit'])
 
 
 @Digit_router.callback_query(F.data == 'clear_pressed')
@@ -176,8 +174,8 @@ async def button_clear_press(callback: CallbackQuery):
                 reply_markup=callback.message.reply_markup)
     else:
         await callback.message.edit_text(
-            text=f'                         Удалять нечего)))                   \U0001f937\u200D\u2642\uFE0F',
+            text=f'\u21AA\uFE0F                  Удалять нечего)))            \U0001f937\u200D\u2642\uFE0F',
             reply_markup=callback.message.reply_markup)
     await callback.answer('*****')
 
-    print('inline_user_kit cleared ')
+    # print('inline_user_kit cleared ')
