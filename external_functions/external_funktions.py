@@ -117,6 +117,15 @@ def append_kit(bot_kit: list, bot_test_combination: list):
     return bot_test_combination
 
 
+def check_len_inline_combo(data:str)->bool:
+    if len(data)<4:
+        return True
+    return False
+
+
+
+
+
 def format_f_string(user_Id: int, user_combo: str, temp_res: list) -> str:
     responce = (f"{language_dict['your combo'][takers[user_Id]['language']]} <b>{user_combo}</b>\n"
                 f"<b>{takers[user_Id]['schritt']}</b> {language_dict['Xod'][takers[user_Id]['language']]}")
@@ -229,3 +238,4 @@ def format_bot_response(user_Id: int, bot_att: str, temp_res: list):
                         bot_responce + f"  <b>{temp_res.count('Ox')}</b>  {language_dict['more bulls'][takers[user_Id]['language']]}"
                                        f"  <b>{temp_res.count('Cow')}</b>  {language_dict['more cows'][takers[user_Id]['language']]}  {ox_str} {cow_str}")
             return string
+

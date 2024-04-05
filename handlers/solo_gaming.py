@@ -5,19 +5,21 @@ from filters import *
 from external_functions import *
 from keyboards import *
 from config import takers, Four_bools
-from aiogram.types import Message
+from aiogram.types import Message, ReplyKeyboardRemove
 import time
 
 Solo_router = Router()
 
+# edit_message_reply_markup
 
+digit_keyboards_tuple = (keyboard_digits_Rus, keyboard_digits, keyboard_digits_De)
 @Solo_router.message(SOLO_GAME_PROCESS(), DATA_IS_DIGIT())
 async def solo_gaming(message: Message):
     """В хэндлер попадают комбинации юзера в режиме SOLO"""
 
     userID = message.from_user.id
     user_attempt_guess_botCombo(takers, userID, message)
-    if message.text == 'send':
+    if message.text == button_emoji:
         sending_user_combo = list(
             takers[userID]['inline_user_kit'])  # Если Юзер ввел комбинацию инлайн клавиатурой
     else:
@@ -35,9 +37,9 @@ async def solo_gaming(message: Message):
         await message.reply(stroka)
         time.sleep(1)
         await message.answer(language_dict["next combo do"][takers[userID]["language"]],
-                             reply_markup=keyboard_digits)
-        await message.answer(text=language_dict['press send'][takers[userID]['language']],
-                             reply_markup=usual_clava)
+                             reply_markup=digit_keyboards_tuple[takers[userID]['language']])
+        # await message.answer(text=language_dict['press send'][takers[userID]['language']],
+        #                      reply_markup=usual_clava)
         takers[message.from_user.id]['inline_user_kit'] = ''
     else:
         stroka = (f"{takers[userID]['schritt']}  Ход  <b>{temp_res.count('Ox')} Bools !!!</b> \n")

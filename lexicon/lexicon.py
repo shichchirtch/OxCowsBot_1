@@ -195,3 +195,6 @@ language_dict = {'if not start': ('Для начала работы с бото�
 
 
                  }
+
+inline_dict= {"delete": ("Удалить символ", " Delete", "Streichen"),
+              "clear":( "Очистить поле", "Clear field", "Klares Feld")}

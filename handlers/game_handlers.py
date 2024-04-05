@@ -11,7 +11,8 @@ import time
 from copy import deepcopy
 
 Game_router = Router()
-# a = lexicon.language_dict
+
+digit_keyboards_tuple = (keyboard_digits_Rus, keyboard_digits, keyboard_digits_De)
 
 @Game_router.message(F.content_type != ContentType.TEXT)
 async def process_notTEXT_answers(message: Message):
@@ -53,7 +54,9 @@ async def set_user_set(message: Message):  # Здесь юзер устанав�
 # Этот хэндлер будет срабатывать на согласие пользователя сыграть в игру
 @Game_router.message(DATA_IS_NOT_DIGIT(), BOT_COMB(), GAME_STATUS_FALSE(), F.text.lower().in_(positiv_answer))
 async def process_positive_answer(message: Message):
-    await message.answer_sticker(sticker_dict['rocket bull'])
+    await message.answer_sticker(sticker_dict['rocket bull'],
+                                 reply_markup=usual_clava
+                                 )
     takers[message.from_user.id]['in_game'] = True
     if takers[message.from_user.id]['Hold_Level'] == 'SOLO':
         std_err_logger.info(
@@ -63,9 +66,9 @@ async def process_positive_answer(message: Message):
         std_out_logger.info(f'BOTs COMBO  =  {takers[message.from_user.id]["secret_kit"]} ')
         time.sleep(1)
         await message.answer(language_dict['solo_bot_guessed'][takers[message.from_user.id]['language']],
-                             reply_markup=keyboard_digits)
-        await message.answer(text=language_dict['press send'][takers[message.from_user.id]['language']],
-                             reply_markup=usual_clava)
+                             reply_markup=digit_keyboards_tuple[takers[message.from_user.id]['language']])
+        # await message.answer(text=language_dict['press send'][takers[message.from_user.id]['language']],
+        #                      reply_markup=usual_clava)
 
 
     elif takers[message.from_user.id]['Hold_Level'] == 'WITH SILLY BOT':
@@ -112,8 +115,8 @@ async def set_user_combo(message: Message):
     std_out_logger.info(f'{takers[message.from_user.id]["user_name"]}  zagadal combo   {user_combo}')
     takers[message.from_user.id]["user_comb"] = user_combo
     await message.answer(text=language_dict['after_user_zagadal_combo'][takers[message.from_user.id]['language']],
-                         reply_markup=keyboard_digits)
-    await message.answer(text=language_dict['press send'][takers[message.from_user.id]['language']],
+                         reply_markup=digit_keyboards_tuple[takers[message.from_user.id]['language']])
+    await message.answer(text="\U0001f3c1",
                          reply_markup=usual_clava)
 
     final_res = takers[message.from_user.id]["bot_list"]  # сюда будем аппендить все комбинации ответов бота
@@ -246,7 +249,7 @@ async def gaming_with_bot(message: Message):
             current_data:str = " ".join(list(takers[message.from_user.id]['inline_user_kit']))
             stroka = format_f_string(userID, current_data, temp_res)
 
-            await message.reply(stroka)
+            await message.reply(stroka,  reply_markup=usual_clava)
             time.sleep(1)
 
             bot_test_combo = ' '.join(processing_combo)
@@ -255,7 +258,7 @@ async def gaming_with_bot(message: Message):
             await message.answer(stroka_bot_attempt_combo)
             time.sleep(1)
             await message.answer(language_dict["next combo do"][takers[message.from_user.id]["language"]],
-                                 reply_markup=keyboard_digits)
+                                 reply_markup=digit_keyboards_tuple[takers[message.from_user.id]['language']])
             await message.answer(text=language_dict['press send'][takers[message.from_user.id]['language']],
                                  reply_markup=usual_clava)
             takers[message.from_user.id]['inline_user_kit'] = ''

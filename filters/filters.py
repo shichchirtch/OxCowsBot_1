@@ -1,6 +1,7 @@
 from aiogram.filters import BaseFilter
-from aiogram.types import Message
-from config.config import takers, level_kit, level_kit_with_bot
+from aiogram.types import Message, CallbackQuery
+from config import takers, level_kit, level_kit_with_bot
+from keyboards import button_emoji
 
 
 class RESTART(BaseFilter):
@@ -49,7 +50,7 @@ class GAME_WITH_BOT(BaseFilter):
 
 class DATA_IS_DIGIT(BaseFilter):
     async def __call__(self, message: Message):
-        if message.text.lower() == 'send':
+        if message.text == button_emoji:
             temp_combo_set = set(takers[message.from_user.id]['inline_user_kit'])
             if (takers[message.from_user.id]['inline_user_kit'].isdigit()
                     and len(temp_combo_set) == 4
@@ -87,7 +88,7 @@ class PRE_START(BaseFilter):
 
 class INLINE_FILTER(BaseFilter):
     async def __call__(self, massage: Message):
-        if massage.text == 'send':
+        if massage.text == button_emoji:
             return False
         return True
 class EMPTY_BOT_LIST(BaseFilter):
@@ -99,5 +100,11 @@ class EMPTY_BOT_LIST(BaseFilter):
 class NOT_USER_COMBO(BaseFilter):
     async def __call__(self, message: Message):
         if takers[message.from_user.id]['user_comb']=='setting_data' :
+            return True
+        return False
+
+class VERIFY_LEN_INLINE_COMBO(BaseFilter):
+    async def __call__(self, callback: CallbackQuery):
+        if len(takers[callback.from_user.id]['inline_user_kit'])<4:
             return True
         return False
