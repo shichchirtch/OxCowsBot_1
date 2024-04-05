@@ -208,14 +208,24 @@ async def set_user_combo(message: Message):
 
     if takers[message.from_user.id]["game_level"] == "WITH SMART BOT":
         if len(final_res) > 8:
-            final_res = [final_res][0] + final_res[1:-1:2]
-            takers[message.from_user.id]["bot_list"] = final_res[:8] + [first_bot_data_copy]
+            first_data = final_res[0]
+            final_res = final_res[1:-1:2]
+            final_res = final_res[:7]
+            arr = [first_data, *final_res, first_bot_data_copy]
+            takers[message.from_user.id]["bot_list"] = arr
+            print('1 case arr = ', arr)
         else:
-
-            final_res = final_res[:-2] + [first_bot_data_copy]
-            takers[message.from_user.id]["bot_list"] = final_res
+            print(final_res)
+            arr = [*final_res, first_bot_data_copy]
+            takers[message.from_user.id]["bot_list"] = arr
+            print('2 case arr = ', arr)
     else:
-        takers[message.from_user.id]["bot_list"] = final_res
+        # print('final+res = ', final_res)
+        final_res = final_res[:-1]
+        # print("final rest [:-1] = ", final_res)
+        takers[message.from_user.id]["bot_list"] = [*final_res, first_bot_data_copy]
+    std_err_logger.info(f'Список Бота - {takers[message.from_user.id]["bot_list"]}')
+
 
 
 @Game_router.message(BOT_USER_GAMING(), DATA_IS_DIGIT())
@@ -233,7 +243,7 @@ async def gaming_with_bot(message: Message):
 
     temp_game_arr = seek_bools(takers[message.from_user.id]['user_comb'], processing_combo)
 
-    if message.text.lower() == 'send':
+    if message.text == button_emoji:
         temp_res = list(takers[message.from_user.id]['inline_user_kit'])  # Если Юзер ввел комбинацию инлайн клавиатурой
     else:
         temp_res = list(message.text)  # Вот здесь присваиваем значение комбинации введенной юзером
@@ -259,8 +269,8 @@ async def gaming_with_bot(message: Message):
             time.sleep(1)
             await message.answer(language_dict["next combo do"][takers[message.from_user.id]["language"]],
                                  reply_markup=digit_keyboards_tuple[takers[message.from_user.id]['language']])
-            await message.answer(text=language_dict['press send'][takers[message.from_user.id]['language']],
-                                 reply_markup=usual_clava)
+            # await message.answer(text=language_dict['press send'][takers[message.from_user.id]['language']],
+            #                      reply_markup=usual_clava)
             takers[message.from_user.id]['inline_user_kit'] = ''
 
         else:
@@ -285,9 +295,9 @@ async def gaming_with_bot(message: Message):
 
     else:
         bot_win_stroka = (language_dict['bot ugadal'][
-                              takers[message.from_user.id]['language']] + f"{' '.join(processing_combo)}\n"
+                              takers[message.from_user.id]['language']] + f"<b>{' '.join(processing_combo)}</b>\n"
                           + language_dict['bots COMBO was'][takers[message.from_user.id]['language']] +
-                          f"{' '.join(takers[message.from_user.id]['secret_kit'])}\n")
+                          f"<b>{' '.join(takers[message.from_user.id]['secret_kit'])}</b>\n")
         takers[message.from_user.id]['bot_pobeda'] += 1
 
         await message.answer(text=bot_win_stroka)

@@ -84,9 +84,9 @@ language_dict = {'if not start': ('Для начала работы с бото�
 
                  'wrong sent data': (
                      'Мы же сейчас с вами играем. \nПрисылайте, пожалуйста, комбинацию '
-                     'из ЧЕТЫРЁХ чисел от <b>0</b> до <b>9</b>',
-                     "We're playing with you now. \nPlease send your combo fron four numbers from <b>0</b> to <b>9</b>",
-                     'Wir spielen jetzt mit dir.\nBitte senden Sie Vier Zahlen Combo von 0 bis 9'),
+                     'из \nЧЕТЫРЁХ чисел от <b>0</b> до <b>9</b>',
+                     "We're playing with you now. \nPlease send your combo from four\n numbers from <b>0</b> to <b>9</b>",
+                     'Wir spielen jetzt mit dir.\nBitte senden Sie Vier Zahlen\n Combo von 0 bis 9'),
 
                  'wrong content type': (',  Вы хотите сыграть в игру ?',
                                         ', do you want to play a game?',
@@ -191,7 +191,17 @@ language_dict = {'if not start': ('Для начала работы с бото�
 
                  'bot says': ('\U0001f916        <b><i>Бот ходит !</i></b>          \U0001f955\nМоя тест-комбинация -  ',
                               "\U0001f916        <b><i>BOT GAMES NEXT !</i></b>     \U0001f955\nMy combo-kit is  ",
-                              '\U0001f916        <b><i>Bot spilt weiter !</i></b>   \U0001f955\nMeine Combo Setzen ist  ')
+                              '\U0001f916        <b><i>Bot spilt weiter !</i></b>   \U0001f955\nMeine Combo Setzen ist  '),
+
+                 'repeat combo 1' : ( "Вы уже называли эту комбинацию  на ",
+                                      'You have already said this Combo, ',
+                                      "Nicht wiedercholen seine Combo "),
+
+                'repeat combo 2' : ("Ходу", "attempt", "Schritt")
+
+
+
+
 
 
                  }

@@ -4,6 +4,7 @@ from aiogram import Router, F
 from config import takers
 from external_functions import format_string, check_len_inline_combo
 from filters import VERIFY_LEN_INLINE_COMBO
+from random import choice
 
 
 Digit_router = Router()
@@ -230,9 +231,14 @@ async def button_clear_press(callback: CallbackQuery):
     await callback.answer('*****')
 
     # print('inline_user_kit cleared ')
-
+emo_tuple = ('\U0001f951', '\U0001f346', '\U0001f954', '\U0001f33d', '\U0001f336\uFE0F', '\U0001fad1', '\U0001f952',
+             '\U0001f96c', '\U0001f966', '\U0001f9c4', '\U0001f9c5', '\U0001f95c', '\U0001fad8', '\U0001f330',
+             '\U0001fada', '\U0001fadb')
 @Digit_router.callback_query(F.data == 'send_pressed')
 async def button_send(callback: CallbackQuery):
-    pass
+    await callback.message.edit_text(
+        text=choice(emo_tuple),
+        reply_markup=None)
+
     # await callback.message.edit_text(text='\U0001f680',
     #                                  reply_markup=callback.message.reply_markup)

@@ -16,16 +16,6 @@ def get_secret_kit(bot_str_tally):
     secret_kit = sample(bot_str_tally, k=4)
     return secret_kit
 
-
-def check_bools(funk, secret_data, solo_data):
-    sample = ["Ox", 'Ox', 'Ox', 'Ox']
-    res = funk(secret_data, solo_data)
-    print('check bools works res = ', res)
-    if res == sample:
-        return solo_data
-    return False
-
-
 def seek_bools(bot_tally, user_data):  # Сначала то, что угадывается, потом то, что вводится в попытке угадать
     temp_game_arr = []
     for k, num in enumerate(user_data):
@@ -123,7 +113,10 @@ def check_len_inline_combo(data:str)->bool:
     return False
 
 
-
+def check_game_list(user_combo:list, game_list:list):
+    if user_combo not in game_list:
+        return True
+    return False
 
 
 def format_f_string(user_Id: int, user_combo: str, temp_res: list) -> str:
