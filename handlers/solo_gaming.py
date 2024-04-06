@@ -10,8 +10,9 @@ import time
 
 Solo_router = Router()
 
-
+k_af = (keyboard_after_finish, keyboard_after_finish_eng)
 digit_keyboards_tuple = (keyboard_digits_Rus, keyboard_digits, keyboard_digits_De)
+multi_start_clava =(start_clava, start_clava_eng)
 @Solo_router.message(SOLO_GAME_PROCESS(), DATA_IS_DIGIT())
 async def solo_gaming(message: Message):
     """В хэндлер попадают комбинации юзера в режиме SOLO"""
@@ -62,7 +63,7 @@ async def solo_gaming(message: Message):
             reset_user_dict_after_finish(takers, userID)  # Здесь происходит перезапись значений в словаре юзера
             await message.answer(text=language_dict['play new game after user wins']
                 [takers[message.from_user.id]['language']],
-                                 reply_markup=keyboard_after_finish)
+                                 reply_markup=k_af[takers[message.from_user.id]['language']])
     else:
         repeated_att = takers[message.from_user.id]['game_list'].index(sending_user_combo)
         repeated_data = " ".join(sending_user_combo)
@@ -93,8 +94,7 @@ async def process_other_answers(message: Message):
                                  reply_markup=digit_keyboards_tuple[takers[message.from_user.id]['language']])
             await message.answer(text=language_dict['next combo do'][takers[message.from_user.id]['language']],
                                  reply_markup=usual_clava)
-            # await message.answer(text=language_dict['press send'][takers[message.from_user.id]['language']],
-            #                      reply_markup=usual_clava)
+
 
     else:
         if message.text == ('/start'):
@@ -102,4 +102,4 @@ async def process_other_answers(message: Message):
         else:
             await message.answer(language_dict['silly bot'][takers[message.from_user.id]['language']])
             await message.answer_sticker(sticker_dict['silly bot'],
-                                         reply_markup=start_clava)
+                                         reply_markup=multi_start_clava[takers[message.from_user.id]['language']])

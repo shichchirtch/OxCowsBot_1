@@ -13,7 +13,8 @@ from copy import deepcopy
 Game_router = Router()
 
 digit_keyboards_tuple = (keyboard_digits_Rus, keyboard_digits, keyboard_digits_De)
-
+lang_set = (keyboard_after_saying_NO, keyboard_after_saying_NO_eng)
+yes_no_kb = (keyboard_yes_no, keyboard_yes_no_eng)
 @Game_router.message(F.content_type != ContentType.TEXT)
 async def process_notTEXT_answers(message: Message):
     std_err_logger.info(f"{takers[message.from_user.id]['user_name']}   notTEXT works...")
@@ -36,7 +37,7 @@ async def set_user_set(message: Message):  # Здесь юзер устанав�
         await message.answer(text=f"{language_dict['choosing level is'][takers[message.from_user.id]['language']]}"
                                   f"<b>{takers[message.from_user.id]['game_level']}</b>   \n"
                                   f"{language_dict['game start ?'][takers[message.from_user.id]['language']]}",
-                             reply_markup=keyboard_yes_no)
+                             reply_markup=yes_no_kb[takers[message.from_user.id]['language']])
     else:
         if not takers[message.from_user.id]['in_game']:
             takers[message.from_user.id]['game_level'] = message.text
@@ -45,7 +46,7 @@ async def set_user_set(message: Message):  # Здесь юзер устанав�
             await message.answer(text=f"{language_dict['choosing level is'][takers[message.from_user.id]['language']]}"
                                       f"<b>{takers[message.from_user.id]['game_level']}</b>  \n"
                                       f"{language_dict['game start ?'][takers[message.from_user.id]['language']]}",
-                                 reply_markup=keyboard_yes_no)
+                                 reply_markup=yes_no_kb[takers[message.from_user.id]['language']])
         else:
             await message.answer(
                 language_dict['game level is'][message.text][takers[message.from_user.id]['language']])
@@ -89,19 +90,20 @@ async def process_positive_answer(message: Message):
 # Этот хэндлер будет срабатывать на отказ пользователя сыграть в игру
 @Game_router.message(F.text.lower().in_(negative_answer))
 async def process_negative_answer(message: Message):
+
     takers[message.from_user.id]['set_SET'] = 'NotSet'
     std_out_logger.info(f'Юзер {takers[message.from_user.id]["user_name"]} ответил нет !')
     if not takers[message.from_user.id]['in_game']:
         await message.answer(text=language_dict['pity'][takers[message.from_user.id]['language']],
                              reply_markup=ReplyKeyboardRemove())
         await message.answer_sticker(sticker_dict['negative answer'],
-                                     reply_markup=keyboard_after_saying_NO)
+                                     reply_markup=lang_set[takers[message.from_user.id]['language']])
     elif takers[message.from_user.id]['in_game'] and takers[message.from_user.id]['game_list'] == []:
         std_out_logger.info('Интересно, этот блок когда нибудь сработаeт ?')
         await message.answer(text=language_dict['pity'][takers[message.from_user.id]['language']],
                              reply_markup=ReplyKeyboardRemove())
         await message.answer_sticker(sticker_dict['negative answer'],
-                                     reply_markup=keyboard_after_saying_NO)
+                                     reply_markup=lang_set[takers[message.from_user.id]['language']])
     else:
         await message.answer(language_dict['wrong sent data'][takers[message.from_user.id]['language']])
 
@@ -226,7 +228,7 @@ async def set_user_combo(message: Message):
         takers[message.from_user.id]["bot_list"] = [*final_res, first_bot_data_copy]
     std_err_logger.info(f'Список Бота - {takers[message.from_user.id]["bot_list"]}')
 
-
+keyafter_finish =[keyboard_after_finish, keyboard_after_finish_eng]
 
 @Game_router.message(BOT_USER_GAMING(), DATA_IS_DIGIT())
 async def gaming_with_bot(message: Message):
@@ -291,7 +293,7 @@ async def gaming_with_bot(message: Message):
             reset_user_dict_after_finish(takers, userID)  # Здесь происходит перезапись значений в словаре юзера
             await message.answer(text=language_dict['play new game after user wins'][
                 takers[message.from_user.id]['language']],
-                                 reply_markup=keyboard_after_finish)
+                                 reply_markup=keyafter_finish[takers[message.from_user.id]['language']])
 
     else:
         bot_win_stroka = (language_dict['bot ugadal'][
