@@ -7,9 +7,9 @@ sticker_dict = {'process_cancel_command': 'CAACAgIAAxkBAAEEWGVmBURfPi0uMEx284kly
                 }
 positiv_answer = ['да', 'давай', 'сыграем', 'игра', 'yes', 'es', 'нуы',
                   'играть', 'хочу играть', 'OK', 'ok', 'хочу', 'lfdfq',
-                  'хорошо', 'ну', 'ладно', 'lf', 'la', 'da', 'jr', '[jxe', 'ja', 'начать игру']
+                  'хорошо', 'ну', 'ладно', 'lf', 'la', 'da', 'jr', '[jxe', 'ja', 'начать игру', 'Start Spielen']
 
-negative_answer = ['нет', 'не', 'не хочу', 'не буду', 'no', 'net', 'yen', 'ytn', 'nein', 'nicht', 'ne', 'nie', 'No, thanks']
+negative_answer = ['нет', 'не', 'не хочу', 'не буду', 'no', 'net', 'yen', 'ytn', 'nein', 'nicht', 'ne', 'nie', 'No, thanks', 'Nein, danke']
 
 start_greeding = ('Давайте сыграем в <b>"Быков-Коров"</b> ?\n\n'
                   '\U0001f1f7\U0001f1fa По умолчанию используется русский язык.\n'
@@ -112,8 +112,7 @@ language_dict = {'if not start': ('Для начала работы с бото�
                      'Now guess a four number combo for me from 0\uFE0F\u20E3 to 9\uFE0F\u20E3 !',
                      'Erraten Sie mir jetzt vier Zählen von 0\uFE0F\u20E3 bis 9\uFE0F\u20E3 !'),
 
-                 'game start ?': (
-                     "начинаем ?   \U0001f680", "let's go ?    \U0001f680", 'lass uns beginen   \U0001f680'),
+                 'game start ?': ("начинаем ?   \U0001f680", "let's go ?    \U0001f680", 'lass uns beginen   \U0001f680'),
 
                  'silly bot': ('Я довольно ограниченный бот, давайте просто сыграем в игру?',
                                "I'm a pretty limited bot, let's just play a game?",
@@ -131,7 +130,7 @@ language_dict = {'if not start': ('Для начала работы с бото�
                  'solo_bot_guessed': (
                      '   Комбинация загадана !                          \U0001f913\nПопробуйте отгадать !',
                      "    Bot's COMBO is done !                          \U0001f913\nTry to deencrypt it !",
-                     '    Die Kombination ist versteckt!                 \U0001f913\bVersuchen zu erraten!'),
+                     '    Die Kombination ist versteckt!                 \U0001f913\nVersuchen zu erraten!'),
 
                  'bot_ask_user_combo': ('Комбинация загадана ! \nЗагадайте мне свою !',
                                         "Bot's COMBO is done ! \nGive me yours !",
@@ -152,7 +151,7 @@ language_dict = {'if not start': ('Для начала работы с бото�
 
                  'user guessed': (' Вы угадали !\U0001f3c6\nМою Комбинацию ',
                                   'You guessed my Combo \U0001f3c6 ',
-                                  'Du hast meine Combo erraten \U0001f3c6 '),
+                                  '  !\nDu hast meine Combo erraten \U0001f3c6 '),
 
                  'play new game after user wins': ('\n\nМожет, сыграем еще  ?', '\n\nMaybe we can play again  ?',
                                                    '\n\nVielleicht können wir wieder spielen  ?'),
@@ -208,7 +207,19 @@ language_dict = {'if not start': ('Для начала работы с бото�
                                       'You have already said this Combo, ',
                                       "Nicht wiedercholen seine Combo "),
 
-                'repeat combo 2' : ("Ходу", "attempt", "Schritt")
+                'repeat combo 2' : ("Ходу", "attempt", "Schritt"),
+
+                 'you enter':("Вы ввели ","You entered ","Sie haben gesagt "),
+
+                 'inline combo':('Введите  ваше комбо ', 'Enter your Combo ', 'Sagen seine Combo'),
+
+                 'inline again':('Введите  ваше комбо заново ', 'Enter your Combo again ', 'Sagen seine Combo vieder '),
+
+                'nothing' :("Удалять нечего))) ", "Nothing delete))) ", 'Nichts zu löschen')
+
+
+
+
 
 
 

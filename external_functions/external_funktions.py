@@ -28,9 +28,9 @@ def seek_bools(bot_tally, user_data):  # Сначала то, что угады�
     return temp_game_arr
 
 
-def user_attempt_guess_botCombo(us_dict: dict, userID: int, message: Message):
+def user_attempt_guess_botCombo(us_dict: dict, userID: int, new_user_combo:list):
     us_dict[userID]['schritt'] += 1
-    us_dict[userID]['game_list'].append(message.text)
+    us_dict[userID]['game_list'].append(new_user_combo)
     return us_dict
 
 
@@ -100,11 +100,11 @@ def format_string(inline: str) -> str:
     return returned_stroka
 
 
-def append_kit(bot_kit: list, bot_test_combination: list):
-    if bot_kit not in bot_test_combination:
-        bot_test_combination.append(bot_kit)
-        return bot_test_combination
-    return bot_test_combination
+def append_kit(bot_kit: list, bot_test_combinations: list):
+    if bot_kit not in bot_test_combinations:
+        bot_test_combinations.append(bot_kit)
+        return bot_test_combinations
+    return bot_test_combinations
 
 
 def check_len_inline_combo(data:str)->bool:

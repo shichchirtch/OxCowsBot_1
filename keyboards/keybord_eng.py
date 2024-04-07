@@ -1,5 +1,5 @@
-from aiogram.types import (KeyboardButton, ReplyKeyboardMarkup,)
-from aiogram.utils.keyboard import ReplyKeyboardBuilder
+from aiogram.types import KeyboardButton, ReplyKeyboardMarkup
+
 
 start_button_1_eng = KeyboardButton(text='YES')
 start_button_2_eng = KeyboardButton(text='NO')

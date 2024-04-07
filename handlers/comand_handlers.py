@@ -6,7 +6,7 @@ from aiogram import Router
 from lexicon import *
 from config import takers, personal_dict
 from logger import std_out_logger
-from aiogram.types import Message, ReplyKeyboardRemove
+from aiogram.types import ReplyKeyboardRemove
 from keyboards import *
 from copy import deepcopy
 from external_functions import time_counter
@@ -102,7 +102,7 @@ async def process_cancel_command(message: Message):
         await message.answer(language_dict['if not start'][takers[message.from_user.id]['language']])
 
 
-@Comand_router.message(F.text.in_(['Выбрать уровень игры', '/set', 'Select game options']))
+@Comand_router.message(F.text.in_(['Выбрать уровень игры', '/set', 'Select game options', 'Wählen Sie Spieloptionen']))
 async def set_game_level(message: Message):
 
     if message.from_user.id in takers.keys():

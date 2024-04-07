@@ -5,37 +5,43 @@ from filters import *
 from external_functions import *
 from keyboards import *
 from config import takers, Four_bools
-from aiogram.types import Message, ReplyKeyboardRemove
+from aiogram.types import Message
 import time
 
 Solo_router = Router()
 
-k_af = (keyboard_after_finish, keyboard_after_finish_eng)
+k_af = (keyboard_after_finish, keyboard_after_finish_eng, keyboard_after_finish_de)
 digit_keyboards_tuple = (keyboard_digits_Rus, keyboard_digits, keyboard_digits_De)
-multi_start_clava =(start_clava, start_clava_eng)
+multi_start_clava =(start_clava, start_clava_eng, start_clava_de)
 @Solo_router.message(SOLO_GAME_PROCESS(), DATA_IS_DIGIT())
 async def solo_gaming(message: Message):
     """В хэндлер попадают комбинации юзера в режиме SOLO"""
 
     userID = message.from_user.id
-    user_attempt_guess_botCombo(takers, userID, message)
+
     if message.text == button_emoji:
+        print('this block works !')
         sending_user_combo = list(takers[userID]['inline_user_kit'])  # Если Юзер ввел комбинацию инлайн клавиатурой
     else:
         sending_user_combo = list(message.text)  # Вот здесь присваиваем значение комбинации введенной юзером
 
     temp_res = seek_bools(takers[userID]['secret_kit'], sending_user_combo)
-    if check_game_list(sending_user_combo, takers[userID]["game_list"] ):
-        takers[userID]["game_list"].append(sending_user_combo)
-
+    if check_game_list(sending_user_combo, takers[userID]["game_list"]):
+        user_attempt_guess_botCombo(takers, userID, sending_user_combo)
 
         std_out_logger.info(
             f"SOLO {takers[userID]['user_name']} ход {takers[userID]['schritt']}, совпадения = {temp_res}")
 
         if temp_res != Four_bools:
-            current_data = " ".join(list(takers[userID]['inline_user_kit']))
-            stroka = format_f_string(userID, current_data, temp_res)
-            await message.reply(stroka)
+            if message.text == button_emoji:
+                current_data = " ".join(list(takers[userID]['inline_user_kit']))
+                stroka = format_f_string(userID, current_data, temp_res)
+                await message.reply(stroka, reply_markup=usual_clava)
+            else:
+                current_data = " ".join(sending_user_combo)
+                stroka = format_f_string(userID, current_data, temp_res)
+                await message.answer(stroka, reply_markup=usual_clava)
+
             time.sleep(1)
             await message.answer(language_dict["next combo do"][takers[userID]["language"]],
                                  reply_markup=digit_keyboards_tuple[takers[userID]['language']])
@@ -65,15 +71,17 @@ async def solo_gaming(message: Message):
                 [takers[message.from_user.id]['language']],
                                  reply_markup=k_af[takers[message.from_user.id]['language']])
     else:
-        repeated_att = takers[message.from_user.id]['game_list'].index(sending_user_combo)
+        print(takers[message.from_user.id]['game_list'])
+        repeated_att = takers[message.from_user.id]['game_list'].index(sending_user_combo)+1
         repeated_data = " ".join(sending_user_combo)
         stroka = format_f_string(userID, repeated_data, temp_res)
         new_stroka = stroka[:40]
         rest_stroka = stroka[54:]
-        takers[userID]['schritt']-=1
         await message.answer(text=f"{language_dict['repeat combo 1'][takers[userID]['language']]}  <b>{repeated_att}</b> "
                                   f"{language_dict['repeat combo 2'][takers[userID]['language']]}\n"
-                                  f"{new_stroka+rest_stroka}")
+                                  f"{new_stroka+rest_stroka}",
+                             reply_markup=usual_clava
+                             )
 
 
 

@@ -1,16 +1,10 @@
-[2024-04-06 03:32:41,594] #INFO     comand_handlers.py:23 - STD_out - 
+[2024-04-07 02:01:20,001] #INFO     comand_handlers.py:23 - STD_out - 
 BOT запущен  
 ЮЗЕР -->  Ivan  
-TIME --> Sat Apr  6 03:32:41 2024
+TIME --> Sun Apr  7 02:01:20 2024
 
-[2024-04-06 03:32:58,414] #WARNING  game_handlers.py:78 - FILE_LOGGER - Структура словаря takers =  {6685637602: {'user_name': 'Ivan', 'in_game': True, 'secret_kit': ['4', '9', '6', '3'], 'total_games': 0, 'wins': 0, 'game_list': [], 'bot_list': [], 'user_comb': 'setting_data', 'bot_kit': 'empty', 'bot_win': False, 'bot_pobeda': 0, 'language': 1, 'start_time': 2048253.234, 'schritt': 0, 'set_SET': 'SET', 'Hold_Level': 'WITH SILLY BOT', 'game_level': 'WITH SILLY BOT', 'inline_user_kit': ''}}
-[2024-04-06 03:32:58,415] #INFO     game_handlers.py:79 - STD_out - BOTs NUMBER  =  ['4', '9', '6', '3'] 
-[2024-04-06 03:33:00,102] #INFO     comand_handlers.py:81 - STD_out - ЮЗЕР    Ivan нажал команду /cancel в  Sat Apr  6 03:33:00 2024
-[2024-04-06 03:33:22,965] #INFO     game_handlers.py:85 - STD_out - BOTs NUMBER  =  ['9', '3', '6', '1'] 
-[2024-04-06 03:33:27,701] #INFO     game_handlers.py:117 - STD_out - Ivan  zagadal combo   ['8', '7', '6', '5']
-[2024-04-06 03:33:27,972] #INFO     game_handlers.py:134 - STD_out - 
- ********  FIRST BOT attempt [['6', '7', '4', '5']]  for  Ivan  ********
-[2024-04-06 03:33:27,973] #INFO     game_handlers.py:229 - ERR_out - Список Бота - [['8', '7', '6', '5'], ['8', '7', '5', '6'], ['8', '5', '6', '7'], ['7', '8', '6', '5'], ['7', '5', '6', '8'], ['7', '8', '5', '6'], ['6', '5', '8', '7'], ['6', '8', '5', '7'], ['6', '7', '4', '5']]
-[2024-04-06 03:33:34,624] #INFO     game_handlers.py:237 - ERR_out - for Ivan   список комбининаций бота : att = 9,  [['8', '7', '6', '5'], ['8', '7', '5', '6'], ['8', '5', '6', '7'], ['7', '8', '6', '5'], ['7', '5', '6', '8'], ['7', '8', '5', '6'], ['6', '5', '8', '7'], ['6', '8', '5', '7'], ['6', '7', '4', '5']]
-[2024-04-06 03:34:22,461] #INFO     game_handlers.py:237 - ERR_out - for Ivan   список комбининаций бота : att = 8,  [['8', '7', '6', '5'], ['8', '7', '5', '6'], ['8', '5', '6', '7'], ['7', '8', '6', '5'], ['7', '5', '6', '8'], ['7', '8', '5', '6'], ['6', '5', '8', '7'], ['6', '8', '5', '7']]
-[2024-04-06 03:34:31,020] #INFO     game_handlers.py:237 - ERR_out - for Ivan   список комбининаций бота : att = 7,  [['8', '7', '6', '5'], ['8', '7', '5', '6'], ['8', '5', '6', '7'], ['7', '8', '6', '5'], ['7', '5', '6', '8'], ['7', '8', '5', '6'], ['6', '5', '8', '7']]
+[2024-04-07 02:01:23,185] #INFO     game_handlers.py:85 - STD_out - BOTs NUMBER  =  ['1', '5', '0', '2'] 
+[2024-04-07 02:01:26,875] #INFO     game_handlers.py:117 - STD_out - Ivan  zagadal combo   ['0', '9', '8', '7']
+[2024-04-07 02:01:26,941] #INFO     game_handlers.py:132 - STD_out - 
+ ********  FIRST BOT attempt [['5', '2', '3', '0']]  for  Ivan  ********
+[2024-04-07 02:01:26,942] #INFO     game_handlers.py:230 - ERR_out - Список Бота - [['5', '2', '3', '0'], ['5', '2', '3', '0']]
