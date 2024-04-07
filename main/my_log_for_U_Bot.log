@@ -1,10 +1,11 @@
-[2024-04-07 02:01:20,001] #INFO     comand_handlers.py:23 - STD_out - 
+[2024-04-07 15:38:59,323] #INFO     comand_handlers.py:23 - STD_out - 
 BOT запущен  
 ЮЗЕР -->  Ivan  
-TIME --> Sun Apr  7 02:01:20 2024
+TIME --> Sun Apr  7 15:38:59 2024
 
-[2024-04-07 02:01:23,185] #INFO     game_handlers.py:85 - STD_out - BOTs NUMBER  =  ['1', '5', '0', '2'] 
-[2024-04-07 02:01:26,875] #INFO     game_handlers.py:117 - STD_out - Ivan  zagadal combo   ['0', '9', '8', '7']
-[2024-04-07 02:01:26,941] #INFO     game_handlers.py:132 - STD_out - 
- ********  FIRST BOT attempt [['5', '2', '3', '0']]  for  Ivan  ********
-[2024-04-07 02:01:26,942] #INFO     game_handlers.py:230 - ERR_out - Список Бота - [['5', '2', '3', '0'], ['5', '2', '3', '0']]
+[2024-04-07 15:39:02,685] #INFO     game_handlers.py:85 - STD_out - BOTs NUMBER  =  ['7', '6', '2', '3'] 
+[2024-04-07 15:39:05,904] #INFO     game_handlers.py:117 - STD_out - Ivan  zagadal combo   ['7', '6', '5', '4']
+[2024-04-07 15:39:06,034] #INFO     game_handlers.py:133 - STD_out - 
+ ********  FIRST BOT attempt [['9', '8', '5', '1']]  for  Ivan  ********
+[2024-04-07 15:39:06,034] #INFO     game_handlers.py:151 - ERR_out - temp_game_arr 1 works
+[2024-04-07 15:39:06,035] #INFO     game_handlers.py:207 - ERR_out - Список Бота - [['7', '6', '5', '4'], ['7', '5', '4', '6'], ['7', '4', '6', '5'], ['2', '4', '0', '3'], ['9', '8', '5', '1'], ['9', '8', '5', '1']]

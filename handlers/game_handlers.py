@@ -8,7 +8,7 @@ from keyboards import *
 from config import takers, tallys_str_bot, Four_bools
 from aiogram.types import Message, ReplyKeyboardRemove
 import time
-from copy import deepcopy
+
 
 Game_router = Router()
 
@@ -112,123 +112,96 @@ async def process_negative_answer(message: Message):
 async def set_user_combo(message: Message):
     """Этот хэндлер срабатывает, только тогда, когда бот   Т О Ж Е     будет отгадывать комбо юзера
         Этот хэндлер должен срабатывать только один раз за игру с ботом !"""
-
+    takers[message.from_user.id]['in_game'] = True
     user_combo = list(message.text)
     std_out_logger.info(f'{takers[message.from_user.id]["user_name"]}  zagadal combo   {user_combo}')
     takers[message.from_user.id]["user_comb"] = user_combo
-    print('119 bot_list = ', takers[message.from_user.id]["bot_list"])
+
+    # print('119 bot_list = ', takers[message.from_user.id]["bot_list"])
     await message.answer(text=language_dict['after_user_zagadal_combo'][takers[message.from_user.id]['language']],
                          reply_markup=digit_keyboards_tuple[takers[message.from_user.id]['language']])
 
     final_res = takers[message.from_user.id]["bot_list"]  # сюда будем аппендить все комбинации ответов бота
 
-    # Что мы имеем на старте
+    #  Что мы имеем на старте
     start_kit = user_combo  # Уже введена и отловлена хэндлером ! ! !
 
     first_bot_data = get_secret_kit(tallys_str_bot)  # Так бот получает комбинацию, с которой начинает угадывать комбо юзера
-    first_bot_data_copy = deepcopy(first_bot_data)
+    takers[message.from_user.id]["first bot data"]= first_bot_data
     final_res.append(first_bot_data)  # Аппендим первую попытку
 
     std_out_logger.info(
         f'\n ********  FIRST BOT attempt {takers[message.from_user.id]["bot_list"]}  for  {takers[message.from_user.id]["user_name"]}  ********')
 
     rest_bot_chisla_arr = list(set(tallys_str_bot).symmetric_difference(set(first_bot_data)))  # Это набор оставшихся
-    print('135 rest bot chisla arr = ', rest_bot_chisla_arr)
-    # неиспользованными при построении первой комбинации ботом чисел
+    # print('137 rest bot chisla arr = ', rest_bot_chisla_arr)  # неиспользованными при построении первой комбинации ботом чисел
+
     temp_game_arr = seek_bools(start_kit, first_bot_data)
-    print('temp_game_arr =', temp_game_arr)
+
 
     if not temp_game_arr:  # То есть  ни коров ни быков не попало к боту
         std_err_logger.info('NOT temp_game_arr works')    # Раскомментируовать логгер, при необходимости !
         bot_data = rest_bot_chisla_arr[:4]  # Новый набор для бота
-        print('bot_data141 = ', bot_data)
         final_res = append_kit(bot_data, final_res)  # Ну и аппендим сразу вторую попытку бота угадать в список комбинаций
-        print('final_res = ', final_res)
+        first_bot_data = bot_data
         temp_game_arr = seek_bools(start_kit, bot_data)
-
-        if len(temp_game_arr) == 4:  # если 4 коровы \ быка
-            final_res = verify_bools_position(bot_data, start_kit, final_res)
 
     ########################################################  len(temp_game_arr) == 1 ########################################
-    elif len(temp_game_arr) == 1:  # Только одна корова или бык
+    if len(temp_game_arr) == 1:  # Только одна корова или бык
         std_err_logger.info('temp_game_arr 1 works')  # Раскомментируовать логгер, при необходимости !
-        temp_bot_data = first_bot_data.copy()
 
         bot_data = rest_bot_chisla_arr[:4]  # Здесь мы перезаписываем значение bot_data на 4 из 6 оставшихся в наборе
-        print('bot_data = ', bot_data)
         final_res.append(bot_data)  # Ну и аппендим сразу это в список комбинаций
         e, f = rest_bot_chisla_arr[4], rest_bot_chisla_arr[5]
-        print('e = ', e)
-        print('f = ', f)
         temp_game_arr = seek_bools(start_kit, bot_data)
+        first_bot_data = bot_data
+        if len(temp_game_arr) == 1:
+            new_bot_data = [bot_data[0], bot_data[1], e, f]
+            first_bot_data = new_bot_data
+            temp_game_arr = seek_bools(start_kit, new_bot_data)
 
-        if len(temp_game_arr) == 2:  # Может быть 1, 2 или 3 совпадения
-            std_err_logger.info('1 -2 works, 161')
-            new_arr = verify_when_two_cows(bot_data, start_kit)
-            final_res = append_kit(new_arr, final_res)  # Ну и аппендим сразу это в список комбинаций
-            final_res = verify_bools_position(new_arr, start_kit, final_res)  # расставляем быков по местам
-
-        elif len(temp_game_arr) == 3:  # Найдём первым делом лишнюю цифру
-            std_err_logger.info('1 -3 works, 167')
-            last_data = verify_last_data(bot_data, start_kit)
-            # Место этой цифры в bot_data
-            indx = bot_data.index(last_data)
-            # Потом найдём корову из первого набора бота
-            last_cow = verify_last_cow(temp_bot_data, start_kit)
-            #  Заменим в bot_data лишнюю цифру
-            bot_data[indx] = last_cow
-            final_res = append_kit(bot_data, final_res)  # Ну и аппендим сразу это в список комбинаций
-            # Вызовем функцию расставления коров по местам
-            # std_err_logger.info('temp_game_arr 4 works')  # Раскомментируовать логгер, при необходимости !
-            final_res = verify_bools_position(bot_data, start_kit, final_res)
-
-        elif len(temp_game_arr) == 1:  # Значит оставшиеся 2 цифры точно в нашем наборе !
-            std_err_logger.info('1 -1 works, 181')
-            # Сначала найдём оставшиеся 2 коровы в 2 наборах бота
-            third_cow = verify_last_cow(temp_bot_data, start_kit)
-            forth_cow = verify_last_cow(bot_data, start_kit)
-            # Дальше собирем их в один спиоск
-            fourth_coows_list = [e, f, third_cow, forth_cow]
-            final_res = append_kit(fourth_coows_list, final_res)  # Ну и аппендим сразу это в список комбинаций
-            # Дальше Вызовем функцию расставления коров по местам
-            final_res = verify_bools_position(fourth_coows_list, start_kit, final_res)
-
-    elif len(temp_game_arr) == 2:
+    if len(temp_game_arr) == 2:
         std_err_logger.info('temp_game_arr 2 works')  #  Раскомментируовать логгер, при необходимости !
         temp_arr = verify_when_two_cows(first_bot_data, start_kit)
         final_res = append_kit(temp_arr, final_res)  # Ну и аппендим сразу это в список комбинаций
         # Дальше Вызовем функцию расставления коров по местам
         final_res = verify_bools_position(temp_arr, start_kit, final_res)
 
-    elif len(temp_game_arr) == 3:
-        std_err_logger.info('temp_game_arr 3 works')  # Раскомментируовать логгер, при необходимости !
-        # Находим последнюю корову в остаtке набора цифр
-        last_cow = find_one_cow_in_6_numbers(rest_bot_chisla_arr, start_kit)
-        for k, x in enumerate(first_bot_data):
-            if x not in start_kit:
-                first_bot_data[k] = last_cow
-        final_res = append_kit(first_bot_data, final_res)  # Ну и аппендим сразу это в список комбинаций
-        # Дальше Вызовем функцию расставления коров по местам
-        final_res = verify_bools_position(first_bot_data, start_kit, final_res)
 
-    elif len(temp_game_arr) == 4:
+    if len(temp_game_arr) == 3:
+        # print('temp_game_arr 3 works, first bot data = ', first_bot_data)  # Раскомментируовать логгер, при необходимости !
+
+        # Находим последнюю корову в остаtке набора цифр
+        last_tally = set(start_kit).difference(set(first_bot_data)).pop()
+        right_num = list(set(start_kit).intersection(set(first_bot_data)))
+        verifying_arr = right_num + [last_tally]
+
+        final_res = append_kit(verifying_arr, final_res)  # Ну и аппендим сразу это в список комбинаций
+        # Дальше Вызовем функцию расставления коров по местам
+        final_res = verify_bools_position(verifying_arr, start_kit, final_res)
+
+    if len(temp_game_arr) == 4:
         std_err_logger.info('temp_game_arr 4 works')  # Раскомментируовать логгер, при необходимости !
         final_res = verify_bools_position(first_bot_data, start_kit, final_res)
+
+
     final_res = final_res[::-1]  # Делаю реверс списка, чтобы можно было удалять элементы с конца методом рор()
+
 
     if takers[message.from_user.id]["game_level"] == "WITH SMART BOT":
         if len(final_res) > 8:
             first_data = final_res[0]
             final_res = final_res[1:-1:2]
             final_res = final_res[:7]
-            arr = [first_data, *final_res, first_bot_data_copy]
+            arr = [first_data, *final_res,takers[message.from_user.id]["first bot data"]]
             takers[message.from_user.id]["bot_list"] = arr
         else:
-            arr = [*final_res, first_bot_data_copy]
+            arr = [*final_res, takers[message.from_user.id]["first bot data"]]
             takers[message.from_user.id]["bot_list"] = arr
     else:
         final_res = final_res[:-1]
-        takers[message.from_user.id]["bot_list"] = [*final_res, first_bot_data_copy]
+        takers[message.from_user.id]["bot_list"] = [*final_res, takers[message.from_user.id]["first bot data"]]
+
     std_err_logger.info(f'Список Бота - {takers[message.from_user.id]["bot_list"]}')
 
 
@@ -276,8 +249,7 @@ async def gaming_with_bot(message: Message):
                 time.sleep(1)
                 await message.answer(language_dict["next combo do"][takers[message.from_user.id]["language"]],
                                      reply_markup=digit_keyboards_tuple[takers[message.from_user.id]['language']])
-                # await message.answer(text=language_dict['press send'][takers[message.from_user.id]['language']],
-                #                      reply_markup=usual_clava)
+
                 takers[message.from_user.id]['inline_user_kit'] = ''
 
             else:

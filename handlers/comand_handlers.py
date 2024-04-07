@@ -90,6 +90,7 @@ async def process_cancel_command(message: Message):
             takers[message.from_user.id]['bot_kit'] = 'empty'
             takers[message.from_user.id]['set_SET'] = 'NotSet'
             takers[message.from_user.id]['inline_user_kit']=''
+            takers[message.from_user.id]["first bot data"] = None
             await message.answer(
                 language_dict['exit from game'][takers[message.from_user.id]['language']])
             await message.answer_sticker(sticker_dict['process_cancel_command'],

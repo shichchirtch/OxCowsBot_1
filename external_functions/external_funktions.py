@@ -45,6 +45,7 @@ def reset_user_dict_after_finish(us_dict: dict, userID: int) -> dict:
     us_dict[userID]['game_level'] = us_dict[userID]['Hold_Level']
     us_dict[userID]['secret_kit'] = 'no_data'
     us_dict[userID]['inline_user_kit'] = ''
+    us_dict[userID]["first bot data"] = None
     return us_dict
 
 
@@ -58,15 +59,10 @@ def verify_bools_position(bot_kit: list, secret_kit: list, bot_test_combination:
         if spisok not in bot_test_combination:
             bot_test_combination.append(spisok)  # Ну и аппендим сразу это в список комбинаций, если его там ещё нет
         if spisok == secret_kit:
+            print('bot_test_combination = ', bot_test_combination)
             return bot_test_combination
+
     return "something goes wrong"
-
-
-def verify_last_cow(bot_data, secret_kit):
-    set_bot_data = set(bot_data)
-    set_secret_number = set(secret_kit)
-    last_cow = set_secret_number.intersection(set_bot_data).pop()
-    return last_cow
 
 
 def verify_when_two_cows(bot_data, secret_kit):
@@ -79,17 +75,6 @@ def verify_when_two_cows(bot_data, secret_kit):
             new_arr.append(y)
     return new_arr
 
-
-def verify_last_data(bot_kit, secret_kit):
-    set_bot_kit = set(bot_kit)
-    set_secret_number = set(secret_kit)
-    last_data = set_bot_kit.difference(set_secret_number).pop()
-    return last_data
-
-
-def find_one_cow_in_6_numbers(rest_arr, secret_kit):
-    last_tally = set(rest_arr).intersection(set(secret_kit)).pop()
-    return last_tally
 
 
 def format_string(inline: str) -> str:

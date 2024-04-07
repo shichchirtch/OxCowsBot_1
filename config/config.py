@@ -46,6 +46,7 @@ personal_dict = {
     'language': 0,
     'start_time': None,
     'schritt': 0,
+    'first bot data':None,
 
     'set_SET': 'NotSet',
 
