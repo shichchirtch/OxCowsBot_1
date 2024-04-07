@@ -13,11 +13,14 @@ Solo_router = Router()
 k_af = (keyboard_after_finish, keyboard_after_finish_eng, keyboard_after_finish_de)
 digit_keyboards_tuple = (keyboard_digits_Rus, keyboard_digits, keyboard_digits_De)
 multi_start_clava =(start_clava, start_clava_eng, start_clava_de)
-@Solo_router.message(SOLO_GAME_PROCESS(), DATA_IS_DIGIT())
+@Solo_router.message(SOLO_GAME_PROCESS(), DATA_IS_DIGIT(), CHEK_SET_STATUS())
 async def solo_gaming(message: Message):
     """В хэндлер попадают комбинации юзера в режиме SOLO"""
-
+    takers[message.from_user.id]['in_game'] = True
     userID = message.from_user.id
+    if check_secret_nuber(takers, userID):
+        takers[userID]['secret_kit'] = get_secret_kit(tallys_str_bot)
+        std_out_logger.info(f'BOTs COMBO  =  {takers[message.from_user.id]["secret_kit"]} ')
 
     if message.text == button_emoji:
         print('this block works !')
@@ -45,8 +48,7 @@ async def solo_gaming(message: Message):
             time.sleep(1)
             await message.answer(language_dict["next combo do"][takers[userID]["language"]],
                                  reply_markup=digit_keyboards_tuple[takers[userID]['language']])
-            # await message.answer(text=language_dict['press send'][takers[userID]['language']],
-            #                      reply_markup=usual_clava)
+
             takers[message.from_user.id]['inline_user_kit'] = ''
         else:
             stroka = (f"{takers[userID]['schritt']}  Ход  <b>{temp_res.count('Ox')}</b> "
@@ -84,8 +86,6 @@ async def solo_gaming(message: Message):
                              )
 
 
-
-
 @Solo_router.message()
 async def process_other_answers(message: Message):
     if not message.from_user.id in takers:
@@ -102,7 +102,6 @@ async def process_other_answers(message: Message):
                                  reply_markup=digit_keyboards_tuple[takers[message.from_user.id]['language']])
             await message.answer(text=language_dict['next combo do'][takers[message.from_user.id]['language']],
                                  reply_markup=usual_clava)
-
 
     else:
         if message.text == ('/start'):

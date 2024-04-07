@@ -114,7 +114,7 @@ async def set_game_level(message: Message):
             takers[message.from_user.id]['set_SET'] = 'NotSet'
         else:
             answer = takers[message.from_user.id]['game_level']
-            takers[message.from_user.id]['set_attempts'] = 'NotSet'
+            # takers[message.from_user.id]['set_SET'] = 'NotSet'
             await message.answer(language_dict['game level is'][answer][takers[message.from_user.id]['language']] +
                                  takers[message.from_user.id]['game_level'])
     else:

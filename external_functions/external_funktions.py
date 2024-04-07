@@ -103,6 +103,12 @@ def check_game_list(user_combo:list, game_list:list):
         return True
     return False
 
+def check_secret_nuber(us_dict:dict, us_id:int)->bool:
+    if us_dict[us_id]['secret_kit'] == 'no_data':
+        return True
+    return False
+
+
 
 def format_f_string(user_Id: int, user_combo: str, temp_res: list) -> str:
     responce = (f"{language_dict['your combo'][takers[user_Id]['language']]} <b>{user_combo}</b>\n"

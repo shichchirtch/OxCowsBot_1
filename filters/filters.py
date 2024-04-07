@@ -18,6 +18,12 @@ class SET_USER_SET(BaseFilter):
             return True
         return False
 
+class CHEK_SET_STATUS(BaseFilter):
+    async def __call__(self, message: Message):
+        if takers[message.from_user.id]['set_SET'] == 'NotSet':
+            return False
+        return True
+
 
 class BOT_COMB(BaseFilter):
     async def __call__(self, message: Message):
@@ -91,6 +97,7 @@ class INLINE_FILTER(BaseFilter):
         if massage.text == button_emoji:
             return False
         return True
+
 class EMPTY_BOT_LIST(BaseFilter):
     async def __call__(self, message: Message):
         if not takers[message.from_user.id]['bot_list'] :

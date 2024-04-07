@@ -68,8 +68,6 @@ async def process_positive_answer(message: Message):
         time.sleep(1)
         await message.answer(language_dict['solo_bot_guessed'][takers[message.from_user.id]['language']],
                              reply_markup=digit_keyboards_tuple[takers[message.from_user.id]['language']])
-        # await message.answer(text=language_dict['press send'][takers[message.from_user.id]['language']],
-        #                      reply_markup=usual_clava)
 
 
     elif takers[message.from_user.id]['Hold_Level'] == 'WITH SILLY BOT':
@@ -91,7 +89,8 @@ async def process_positive_answer(message: Message):
 @Game_router.message(F.text.lower().in_(negative_answer))
 async def process_negative_answer(message: Message):
 
-    takers[message.from_user.id]['set_SET'] = 'NotSet'
+    takers[message.from_user.id]['set_SET'] = 'NotSet' # Эта натсройка не позволит продолжить игру просто вводом комбинаций
+
     std_out_logger.info(f'Юзер {takers[message.from_user.id]["user_name"]} ответил нет !')
     if not takers[message.from_user.id]['in_game']:
         await message.answer(text=language_dict['pity'][takers[message.from_user.id]['language']],
@@ -99,7 +98,7 @@ async def process_negative_answer(message: Message):
         await message.answer_sticker(sticker_dict['negative answer'],
                                      reply_markup=lang_set[takers[message.from_user.id]['language']])
     elif takers[message.from_user.id]['in_game'] and takers[message.from_user.id]['game_list'] == []:
-        std_out_logger.info('Интересно, этот блок когда нибудь сработаeт ?')
+        std_err_logger.info('User  сказал нет до введения первой комбинации')
         await message.answer(text=language_dict['pity'][takers[message.from_user.id]['language']],
                              reply_markup=ReplyKeyboardRemove())
         await message.answer_sticker(sticker_dict['negative answer'],
@@ -108,16 +107,23 @@ async def process_negative_answer(message: Message):
         await message.answer(language_dict['wrong sent data'][takers[message.from_user.id]['language']])
 
 
-@Game_router.message(DATA_IS_DIGIT(), GAME_WITH_BOT(), EMPTY_BOT_LIST(), NOT_USER_COMBO(), INLINE_FILTER())
+@Game_router.message(DATA_IS_DIGIT(), GAME_WITH_BOT(), EMPTY_BOT_LIST(),
+                     NOT_USER_COMBO(), INLINE_FILTER(), CHEK_SET_STATUS())
 async def set_user_combo(message: Message):
     """Этот хэндлер срабатывает, только тогда, когда бот   Т О Ж Е     будет отгадывать комбо юзера
         Этот хэндлер должен срабатывать только один раз за игру с ботом !"""
     takers[message.from_user.id]['in_game'] = True
+
+    if check_secret_nuber(takers, message.from_user.id):
+        takers[message.from_user.id]['secret_kit'] = get_secret_kit(tallys_str_bot)
+        std_out_logger.info(f'BOTs COMBO  =  {takers[message.from_user.id]["secret_kit"]} ')
+        await message.answer(language_dict['bot_ask_user_combo'][takers[message.from_user.id]['language']],
+                             reply_markup=usual_clava)
+
     user_combo = list(message.text)
     std_out_logger.info(f'{takers[message.from_user.id]["user_name"]}  zagadal combo   {user_combo}')
     takers[message.from_user.id]["user_comb"] = user_combo
 
-    # print('119 bot_list = ', takers[message.from_user.id]["bot_list"])
     await message.answer(text=language_dict['after_user_zagadal_combo'][takers[message.from_user.id]['language']],
                          reply_markup=digit_keyboards_tuple[takers[message.from_user.id]['language']])
 
@@ -134,7 +140,7 @@ async def set_user_combo(message: Message):
         f'\n ********  FIRST BOT attempt {takers[message.from_user.id]["bot_list"]}  for  {takers[message.from_user.id]["user_name"]}  ********')
 
     rest_bot_chisla_arr = list(set(tallys_str_bot).symmetric_difference(set(first_bot_data)))  # Это набор оставшихся
-    # print('137 rest bot chisla arr = ', rest_bot_chisla_arr)  # неиспользованными при построении первой комбинации ботом чисел
+                                                                                                  # неиспользованными при построении первой комбинации ботом чисел
 
     temp_game_arr = seek_bools(start_kit, first_bot_data)
 
@@ -169,8 +175,7 @@ async def set_user_combo(message: Message):
 
 
     if len(temp_game_arr) == 3:
-        # print('temp_game_arr 3 works, first bot data = ', first_bot_data)  # Раскомментируовать логгер, при необходимости !
-
+        # std_err_logger.info('temp_game_arr 3 works, first bot data = ', first_bot_data)  # Раскомментируовать логгер, при необходимости !
         # Находим последнюю корову в остаtке набора цифр
         last_tally = set(start_kit).difference(set(first_bot_data)).pop()
         right_num = list(set(start_kit).intersection(set(first_bot_data)))
@@ -181,7 +186,7 @@ async def set_user_combo(message: Message):
         final_res = verify_bools_position(verifying_arr, start_kit, final_res)
 
     if len(temp_game_arr) == 4:
-        std_err_logger.info('temp_game_arr 4 works')  # Раскомментируовать логгер, при необходимости !
+        # std_err_logger.info('temp_game_arr 4 works')  # Раскомментируовать логгер, при необходимости !
         final_res = verify_bools_position(first_bot_data, start_kit, final_res)
 
 
@@ -206,7 +211,7 @@ async def set_user_combo(message: Message):
 
 
 
-@Game_router.message(BOT_USER_GAMING(), DATA_IS_DIGIT())
+@Game_router.message(BOT_USER_GAMING(), DATA_IS_DIGIT(), CHEK_SET_STATUS())
 async def gaming_with_bot(message: Message):
     """Сюда попадают комбинации, которые вводит юзер"""
 
