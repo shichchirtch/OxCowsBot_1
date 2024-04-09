@@ -23,17 +23,18 @@ async def solo_gaming(message: Message):
         std_out_logger.info(f'BOTs COMBO  =  {takers[message.from_user.id]["secret_kit"]} ')
 
     if message.text == button_emoji:
-        print('this block works !')
+        # print('this block works !')
         sending_user_combo = list(takers[userID]['inline_user_kit'])  # Если Юзер ввел комбинацию инлайн клавиатурой
     else:
         sending_user_combo = list(message.text)  # Вот здесь присваиваем значение комбинации введенной юзером
+
 
     temp_res = seek_bools(takers[userID]['secret_kit'], sending_user_combo)
     if check_game_list(sending_user_combo, takers[userID]["game_list"]):
         user_attempt_guess_botCombo(takers, userID, sending_user_combo)
 
         std_out_logger.info(
-            f"SOLO {takers[userID]['user_name']} ход {takers[userID]['schritt']}, совпадения = {temp_res}")
+            f"SOLO {takers[userID]['user_name']} ход {takers[userID]['schritt']}, AttemtCOMBO  =  {sending_user_combo}   совпадения = {temp_res}")
 
         if temp_res != Four_bools:
             if message.text == button_emoji:

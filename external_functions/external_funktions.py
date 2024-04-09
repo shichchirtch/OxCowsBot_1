@@ -59,7 +59,7 @@ def verify_bools_position(bot_kit: list, secret_kit: list, bot_test_combination:
         if spisok not in bot_test_combination:
             bot_test_combination.append(spisok)  # Ну и аппендим сразу это в список комбинаций, если его там ещё нет
         if spisok == secret_kit:
-            print('bot_test_combination = ', bot_test_combination)
+            # print('bot_test_combination = ', bot_test_combination)
             return bot_test_combination
 
     return "something goes wrong"

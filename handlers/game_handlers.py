@@ -215,10 +215,6 @@ async def set_user_combo(message: Message):
 async def gaming_with_bot(message: Message):
     """Сюда попадают комбинации, которые вводит юзер"""
 
-    std_err_logger.info(
-        f'for {takers[message.from_user.id]["user_name"]}   '
-        f'список комбининаций бота : att = {len(takers[message.from_user.id]["bot_list"])},  '
-        f'{takers[message.from_user.id]["bot_list"]}')
     userID = message.from_user.id
 
     if message.text == button_emoji:
@@ -226,10 +222,16 @@ async def gaming_with_bot(message: Message):
     else:
         temp_res = list(message.text)  # Вот здесь присваиваем значение комбинации введенной юзером
 
+
     if check_game_list(temp_res, takers[userID]["game_list"]):
         final_res = takers[message.from_user.id]['bot_list']
         processing_combo = final_res.pop()  # Последний элемент из списка алгоритма бота
         temp_game_arr = seek_bools(takers[message.from_user.id]['user_comb'], processing_combo)
+
+        std_err_logger.info(
+            f'for {takers[message.from_user.id]["user_name"]}   AttemtCOMBO  =  {temp_res} , '
+            f'список комбининаций бота : att = {len(takers[message.from_user.id]["bot_list"])},  '
+            f'{takers[message.from_user.id]["bot_list"]}')
         if temp_game_arr != Four_bools:
             # USER PART
             user_attempt_guess_botCombo(takers, userID, temp_res)  # Делаем необходимые преoбразования со словарём игрока
