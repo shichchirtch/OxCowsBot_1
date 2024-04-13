@@ -1,10 +1,9 @@
-[2024-04-12 20:24:29,824] #INFO     comand_handlers.py:23 - STD_out - 
+[2024-04-14 00:17:41,441] #INFO     comand_handlers.py:23 - STD_out - 
 BOT запущен  
 ЮЗЕР -->  Ivan  
-TIME --> Fri Apr 12 20:24:29 2024
+TIME --> Sun Apr 14 00:17:41 2024
 
-[2024-04-12 20:24:34,287] #INFO     game_handlers.py:63 - ERR_out - 
+[2024-04-14 00:17:55,543] #INFO     game_handlers.py:63 - ERR_out - 
 Юзер Ivan играет 1 игру
-[2024-04-12 20:24:34,287] #INFO     game_handlers.py:67 - STD_out - BOTs COMBO  =  ['5', '0', '4', '1'] 
-[2024-04-12 20:24:42,625] #INFO     solo_gaming.py:36 - STD_out - SOLO Ivan ход 1, AttemtCOMBO  =  ['8', '3', '7', '1']   совпадения = ['Ox']
-[2024-04-12 21:48:54,949] #INFO     solo_gaming.py:36 - STD_out - SOLO Ivan ход 2, AttemtCOMBO  =  ['7', '3', '5', '6']   совпадения = ['Cow']
+[2024-04-14 00:17:55,543] #INFO     game_handlers.py:67 - STD_out - BOTs COMBO  =  ['5', '3', '8', '7'] 
+[2024-04-14 00:18:04,134] #INFO     solo_gaming.py:36 - STD_out - SOLO Ivan ход 1, AttemtCOMBO  =  ['8', '2', '7', '6']   совпадения = ['Cow', 'Cow']

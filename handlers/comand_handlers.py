@@ -6,7 +6,7 @@ from aiogram import Router
 from lexicon import *
 from config import takers, personal_dict
 from logger import std_out_logger
-from aiogram.types import ReplyKeyboardRemove
+from aiogram.types import ReplyKeyboardRemove, Message
 from keyboards import *
 from copy import deepcopy
 from external_functions import time_counter

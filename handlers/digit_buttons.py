@@ -26,6 +26,7 @@ async def button_1_press(callback: CallbackQuery):
             await callback.message.edit_text(
                 text='\U0001f928' + ' ' * 19 + f'{enter}  <b>{pattern}</b>' + ' ' * 19 + '\u27A1\uFE0F',
                 reply_markup=None)
+    await callback.answer()
 
 @Digit_router.callback_query(F.data == '2_pressed', VERIFY_LEN_INLINE_COMBO())
 
@@ -44,6 +45,7 @@ async def button_2_press(callback: CallbackQuery):
             await callback.message.edit_text(
                 text='\U0001f928' + ' ' * 19 + f'{enter}  <b>{pattern}</b>' + ' ' * 19 + '\u27A1\uFE0F',
                 reply_markup=None)
+    await callback.answer()
 
 @Digit_router.callback_query(F.data == '3_pressed', VERIFY_LEN_INLINE_COMBO())
 async def button_3_press(callback: CallbackQuery):
@@ -61,6 +63,7 @@ async def button_3_press(callback: CallbackQuery):
             await callback.message.edit_text(
                 text='\U0001f928' + ' ' * 19 + f'{enter}  <b>{pattern}</b>' + ' ' * 19 + '\u27A1\uFE0F',
                 reply_markup=None)
+    await callback.answer()
 
 
 @Digit_router.callback_query(F.data == '4_pressed', VERIFY_LEN_INLINE_COMBO())
@@ -79,6 +82,7 @@ async def button_4_press(callback: CallbackQuery):
             await callback.message.edit_text(
                 text='\U0001f928' + ' ' * 19 + f'{enter}  <b>{pattern}</b>' + ' ' * 19 + '\u27A1\uFE0F',
                 reply_markup=None)
+    await callback.answer()
 
 @Digit_router.callback_query(F.data == '5_pressed', VERIFY_LEN_INLINE_COMBO())
 async def button_5_press(callback: CallbackQuery):
@@ -96,6 +100,7 @@ async def button_5_press(callback: CallbackQuery):
             await callback.message.edit_text(
                 text='\U0001f928' + ' ' * 19 + f'{enter}  <b>{pattern}</b>' + ' ' * 19 + '\u27A1\uFE0F',
                 reply_markup=None)
+    await callback.answer()
 
 
 
@@ -116,6 +121,7 @@ async def button_6_press(callback: CallbackQuery):
             await callback.message.edit_text(
                 text='\U0001f928' + ' ' * 19 + f'{enter}  <b>{pattern}</b>' + ' ' * 19 + '\u27A1\uFE0F',
                 reply_markup=None)
+    await callback.answer()
 
 
 @Digit_router.callback_query(F.data == '7_pressed', VERIFY_LEN_INLINE_COMBO())
@@ -134,6 +140,7 @@ async def button_7_press(callback: CallbackQuery):
             await callback.message.edit_text(
                 text='\U0001f928' + ' ' * 19 + f'{enter}  <b>{pattern}</b>' + ' ' * 19 + '\u27A1\uFE0F',
                 reply_markup=None)
+    await callback.answer()
 
 
 @Digit_router.callback_query(F.data == '8_pressed', VERIFY_LEN_INLINE_COMBO())
@@ -152,6 +159,7 @@ async def button_8_press(callback: CallbackQuery):
             await callback.message.edit_text(
                 text='\U0001f928' + ' ' * 19 + f'{enter}  <b>{pattern}</b>' + ' ' * 19 + '\u27A1\uFE0F',
                 reply_markup=None)
+    await callback.answer()
 
 
 @Digit_router.callback_query(F.data == '9_pressed', VERIFY_LEN_INLINE_COMBO())
@@ -170,7 +178,7 @@ async def button_9_press(callback: CallbackQuery):
             await callback.message.edit_text(
                 text='\U0001f928' + ' ' * 19 + f'{enter}  <b>{pattern}</b>' + ' ' * 19 + '\u27A1\uFE0F',
                 reply_markup=None)
-
+    await callback.answer()
 
 @Digit_router.callback_query(F.data == '0_pressed', VERIFY_LEN_INLINE_COMBO())
 async def button_0_press(callback: CallbackQuery):
@@ -188,6 +196,7 @@ async def button_0_press(callback: CallbackQuery):
             await callback.message.edit_text(
                 text='\U0001f928' + ' ' * 19 + f'{enter}  <b>{pattern}</b>' + ' ' * 19 + '\u27A1\uFE0F',
                 reply_markup=None)
+    await callback.answer()
 
 
 
