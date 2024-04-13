@@ -7,9 +7,17 @@ from config import *
 
 def time_counter(start_time):
     current_time = time.monotonic()
-    secund = (current_time - start_time) % 60
-    minut = (current_time - start_time) // 60
-    return int(minut), int(secund)
+    if current_time - start_time < 3600:
+        secund = (current_time - start_time) % 60
+        minut = (current_time - start_time) // 60
+        time_data = f'<b><i>GameTiming : {int(minut)} min, {int(secund)} sec.</i></b>'
+        return time_data
+    if 3600 < current_time - start_time < 3600*24:
+        time_data = '<b><i>More then 1 hour</i></b>'
+        return time_data
+    else:
+        time_data = '<b><i>More then 1 day</i></b>'
+        return time_data
 
 
 def get_secret_kit(bot_str_tally):

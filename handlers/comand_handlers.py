@@ -124,12 +124,12 @@ async def set_game_level(message: Message):
 @Comand_router.message(F.text.in_(['/schet','Узнать Счёт', 'VS']))
 async def uznatb_schet(message: Message):
     if message.from_user.id in takers.keys():
-        minut, secund = time_counter(takers[message.from_user.id]["start_time"])
+        time_data = time_counter(takers[message.from_user.id]["start_time"])
         if not takers[message.from_user.id]['in_game']:
             await message.answer(f"<b><i>{takers[message.from_user.id]['user_name']} : {takers[message.from_user.id]['wins']}</i></b>\n"
                                  f'<b><i>BOT : {takers[message.from_user.id]["bot_pobeda"]}</i></b>\n'
-                                 f'<b><i>Total Game : {takers[message.from_user.id]["total_games"]}</i></b>'
-                                 f'\n<b><i>GameTiming : {minut} min, {secund} sec.</i></b>')
+                                 f'<b><i>Total Game : {takers[message.from_user.id]["total_games"]}</i></b>\n'
+                                 f'{time_data}')
             time.sleep(1)
             await  message.answer(text=language_dict['had a look at scores ?'][takers[message.from_user.id]['language']],
                                   reply_markup=start_clava)
@@ -137,8 +137,8 @@ async def uznatb_schet(message: Message):
             await message.answer(
                 f"<b><i>{takers[message.from_user.id]['user_name']} : {takers[message.from_user.id]['wins']}</i></b>\n"
                 f'<b><i>BOT : {takers[message.from_user.id]["bot_pobeda"]}\n</i></b>'
-                f'<b><i>Total Game : {takers[message.from_user.id]["total_games"]}</i></b>'
-                f'\n<b><i>GameTiming : {minut} min, {secund} sec.</i></b>')
+                f'<b><i>Total Game : {takers[message.from_user.id]["total_games"]}</i></b>\n'
+                f'{time_data}')
             time.sleep(1)
             await  message.answer(
                 text=language_dict['in game querry'][takers[message.from_user.id]['language']])

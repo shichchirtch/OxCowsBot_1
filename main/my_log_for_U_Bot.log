@@ -1,19 +1,10 @@
-[2024-04-09 00:57:50,333] #INFO     comand_handlers.py:23 - STD_out - 
+[2024-04-12 20:24:29,824] #INFO     comand_handlers.py:23 - STD_out - 
 BOT запущен  
 ЮЗЕР -->  Ivan  
-TIME --> Tue Apr  9 00:57:50 2024
+TIME --> Fri Apr 12 20:24:29 2024
 
-[2024-04-09 00:57:53,592] #INFO     game_handlers.py:63 - ERR_out - 
+[2024-04-12 20:24:34,287] #INFO     game_handlers.py:63 - ERR_out - 
 Юзер Ivan играет 1 игру
-[2024-04-09 00:57:53,592] #INFO     game_handlers.py:67 - STD_out - BOTs COMBO  =  ['1', '0', '2', '7'] 
-[2024-04-09 00:57:59,289] #INFO     solo_gaming.py:36 - STD_out - SOLO Ivan ход 1, AttemtCOMBO  =  ['9', '8', '7', '0']   совпадения = ['Cow', 'Cow']
-[2024-04-09 00:58:21,689] #INFO     comand_handlers.py:81 - STD_out - ЮЗЕР    Ivan нажал команду /cancel в  Tue Apr  9 00:58:21 2024
-[2024-04-09 00:58:25,626] #WARNING  game_handlers.py:76 - FILE_LOGGER - Структура словаря takers =  {6685637602: {'user_name': 'Ivan', 'in_game': True, 'secret_kit': ['4', '8', '2', '1'], 'total_games': 0, 'wins': 0, 'game_list': [], 'bot_list': [], 'user_comb': 'setting_data', 'bot_kit': 'empty', 'bot_win': False, 'bot_pobeda': 0, 'language': 0, 'start_time': 2298161.968, 'schritt': 0, 'first bot data': None, 'set_SET': 'SET', 'Hold_Level': 'WITH SILLY BOT', 'game_level': 'WITH SILLY BOT', 'inline_user_kit': ''}}
-[2024-04-09 00:58:25,627] #INFO     game_handlers.py:77 - STD_out - BOTs NUMBER  =  ['4', '8', '2', '1'] 
-[2024-04-09 00:58:28,558] #INFO     game_handlers.py:124 - STD_out - Ivan  zagadal combo   ['8', '7', '6', '5']
-[2024-04-09 00:58:28,614] #INFO     game_handlers.py:139 - STD_out - 
- ********  FIRST BOT attempt [['1', '0', '7', '3']]  for  Ivan  ********
-[2024-04-09 00:58:28,615] #INFO     game_handlers.py:157 - ERR_out - temp_game_arr 1 works
-[2024-04-09 00:58:28,615] #INFO     game_handlers.py:170 - ERR_out - temp_game_arr 2 works
-[2024-04-09 00:58:28,615] #INFO     game_handlers.py:210 - ERR_out - Список Бота - [['8', '7', '6', '5'], ['8', '6', '5', '7'], ['8', '5', '6', '7'], ['8', '6', '7', '5'], ['8', '7', '5', '6'], ['6', '8', '5', '7'], ['6', '5', '7', '8'], ['6', '7', '8', '5'], ['6', '7', '5', '8'], ['6', '5', '8', '7'], ['6', '8', '7', '5'], ['6', '9', '2', '8'], ['1', '0', '7', '3']]
-[2024-04-09 00:58:36,094] #INFO     game_handlers.py:232 - ERR_out - for Ivan   AttemtCOMBO  =  ['8', '3', '7', '2'] , список комбининаций бота : att = 12,  [['8', '7', '6', '5'], ['8', '6', '5', '7'], ['8', '5', '6', '7'], ['8', '6', '7', '5'], ['8', '7', '5', '6'], ['6', '8', '5', '7'], ['6', '5', '7', '8'], ['6', '7', '8', '5'], ['6', '7', '5', '8'], ['6', '5', '8', '7'], ['6', '8', '7', '5'], ['6', '9', '2', '8']]
+[2024-04-12 20:24:34,287] #INFO     game_handlers.py:67 - STD_out - BOTs COMBO  =  ['5', '0', '4', '1'] 
+[2024-04-12 20:24:42,625] #INFO     solo_gaming.py:36 - STD_out - SOLO Ivan ход 1, AttemtCOMBO  =  ['8', '3', '7', '1']   совпадения = ['Ox']
+[2024-04-12 21:48:54,949] #INFO     solo_gaming.py:36 - STD_out - SOLO Ivan ход 2, AttemtCOMBO  =  ['7', '3', '5', '6']   совпадения = ['Cow']
