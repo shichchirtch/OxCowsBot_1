@@ -1,4 +1,4 @@
-from aiogram import Router
+from aiogram import Router, html
 from logger import std_out_logger
 from lexicon import *
 from filters import *
@@ -7,12 +7,14 @@ from keyboards import *
 from config import takers, Four_bools
 from aiogram.types import Message
 import time
+from aiogram.enums.parse_mode import ParseMode
 
 Solo_router = Router()
 
 k_af = (keyboard_after_finish, keyboard_after_finish_eng, keyboard_after_finish_de)
 digit_keyboards_tuple = (keyboard_digits_Rus, keyboard_digits, keyboard_digits_De)
 multi_start_clava =(start_clava, start_clava_eng, start_clava_de)
+
 @Solo_router.message(SOLO_GAME_PROCESS(), DATA_IS_DIGIT(), CHEK_SET_STATUS())
 async def solo_gaming(message: Message):
     """В хэндлер попадают комбинации юзера в режиме SOLO"""
@@ -60,10 +62,11 @@ async def solo_gaming(message: Message):
             time.sleep(1)
             await message.answer(stroka)
             await message.answer_sticker(sticker_dict['win 4 bools'])
-            await message.answer(language_dict['wow'][takers[userID]['language']] +
-                                 '<b>' + takers[message.from_user.id]['user_name'] + '</b>' +
-                                 language_dict['user guessed'][takers[userID]['language']] +
-                                 '<b>'+(pip_print)+'</b>')
+            await message.answer(f"{language_dict['wow'][takers[userID]['language']]}"
+                                 f"{html.bold(html.quote(message.chat.first_name))}"
+                                 f"{language_dict['user guessed'][takers[userID]['language']]}"
+                                 f"<b>{pip_print}</b>",
+                                 parse_mode=ParseMode.HTML)
             std_out_logger.info(
                 f"SOLO ******************* {takers[message.from_user.id]['user_name']} "
                 f"ход {takers[userID]['schritt']}  WINS\n")

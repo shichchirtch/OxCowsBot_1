@@ -1,5 +1,5 @@
 from aiogram.types import ContentType
-from aiogram import Router, F
+from aiogram import Router, F, html
 from logger import logger, std_out_logger, std_err_logger
 from lexicon import *
 from filters import *
@@ -8,6 +8,7 @@ from keyboards import *
 from config import takers, tallys_str_bot, Four_bools
 from aiogram.types import Message, ReplyKeyboardRemove
 import time
+from aiogram.enums.parse_mode import ParseMode
 
 
 Game_router = Router()
@@ -261,17 +262,20 @@ async def gaming_with_bot(message: Message):
 
             else:
                 std_out_logger.info(f"{takers[message.from_user.id]['user_name']}  - Выигрыш\n")
-                stroka = (f"{takers[message.from_user.id]['schritt']}  Ход  {temp_res.count('Ox')} Bools !!! \n")
+                stroka = (f"{takers[message.from_user.id]['schritt']}  Ход  <b>{temp_res.count('Ox')} "
+                          f"{language_dict['more bulls'][takers[userID]['language']]} "
+                          f"  \U0001f402  \U0001f402  \U0001f402  \U0001f402   !!!</b> \n'</b>!!! \n")
                 takers[message.from_user.id]['wins'] += 1
 
                 pip_print = " ".join(takers[message.from_user.id]["secret_kit"])
                 time.sleep(1)
                 await message.answer(stroka)
                 await message.answer_sticker(sticker_dict['win 4 bools'])
-                await message.answer(language_dict['wow'][takers[message.from_user.id]['language']] +
-                                     takers[message.from_user.id]['user_name'] +
-                                     language_dict['user guessed'][takers[message.from_user.id]['language']] +
-                                     (pip_print))
+                await message.answer(f"{language_dict['wow'][takers[userID]['language']]}"
+                                 f"{html.bold(html.quote(message.chat.first_name))}"
+                                 f"{language_dict['user guessed'][takers[userID]['language']]}"
+                                 f"<b>{pip_print}</b>",
+                                 parse_mode=ParseMode.HTML)
                 time.sleep(1)
                 takers[message.from_user.id]['inline_user_kit'] = ''  # обнуляем строку inline_user_kit
                 reset_user_dict_after_finish(takers, userID)  # Здесь происходит перезапись значений в словаре юзера

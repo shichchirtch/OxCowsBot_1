@@ -1,5 +1,5 @@
 import time
-from aiogram import F
+from aiogram import F, html
 from aiogram.filters import Command, CommandStart
 from filters import RESTART, PRE_START
 from aiogram import Router
@@ -10,6 +10,7 @@ from aiogram.types import ReplyKeyboardRemove, Message
 from keyboards import *
 from copy import deepcopy
 from external_functions import time_counter
+from aiogram.enums.parse_mode import ParseMode
 
 # Инициализируем роутер уровня модуля
 Comand_router = Router()
@@ -23,7 +24,8 @@ async def process_start_command(message: Message):
     std_out_logger.info(f'\nBOT запущен  \nЮЗЕР -->  {message.chat.first_name}  \nTIME --> {time.ctime()}\n')
 
     await message.answer(text =
-        f'Привет, <b>{message.chat.first_name}</b> !  \U0001F60A\n {start_greeding}',
+        f'Привет, {html.bold(html.quote(message.chat.first_name))} !  \U0001F60A\n {start_greeding}',
+                         parse_mode=ParseMode.HTML,
                          reply_markup=start_clava)
     takers[message.from_user.id] = deepcopy(personal_dict)
     takers[message.from_user.id]['user_name'] = user_name
@@ -114,7 +116,7 @@ async def set_game_level(message: Message):
             takers[message.from_user.id]['set_SET'] = 'NotSet'
         else:
             answer = takers[message.from_user.id]['game_level']
-            # takers[message.from_user.id]['set_SET'] = 'NotSet'
+
             await message.answer(language_dict['game level is'][answer][takers[message.from_user.id]['language']] +
                                  takers[message.from_user.id]['game_level'])
     else:
@@ -126,19 +128,21 @@ async def uznatb_schet(message: Message):
     if message.from_user.id in takers.keys():
         time_data = time_counter(takers[message.from_user.id]["start_time"])
         if not takers[message.from_user.id]['in_game']:
-            await message.answer(f"<b><i>{takers[message.from_user.id]['user_name']} : {takers[message.from_user.id]['wins']}</i></b>\n"
+            await message.answer(f"{html.bold(html.quote(message.chat.first_name))} : {takers[message.from_user.id]['wins']}</i></b>\n"
                                  f'<b><i>BOT : {takers[message.from_user.id]["bot_pobeda"]}</i></b>\n'
                                  f'<b><i>Total Game : {takers[message.from_user.id]["total_games"]}</i></b>\n'
-                                 f'{time_data}')
+                                 f'{time_data}',
+                                 parse_mode=ParseMode.HTML)
             time.sleep(1)
             await  message.answer(text=language_dict['had a look at scores ?'][takers[message.from_user.id]['language']],
                                   reply_markup=start_clava)
         else:
             await message.answer(
-                f"<b><i>{takers[message.from_user.id]['user_name']} : {takers[message.from_user.id]['wins']}</i></b>\n"
+                f"{html.bold(html.quote(message.chat.first_name))} : {takers[message.from_user.id]['wins']}</i></b>\n"
                 f'<b><i>BOT : {takers[message.from_user.id]["bot_pobeda"]}\n</i></b>'
                 f'<b><i>Total Game : {takers[message.from_user.id]["total_games"]}</i></b>\n'
-                f'{time_data}')
+                f'{time_data}',
+                parse_mode=ParseMode.HTML)
             time.sleep(1)
             await  message.answer(
                 text=language_dict['in game querry'][takers[message.from_user.id]['language']])

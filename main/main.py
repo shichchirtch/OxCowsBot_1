@@ -3,6 +3,7 @@ from aiogram import Bot, Dispatcher
 from aiogram.types import BotCommand
 import handlers
 
+
 env = Env()  # Создаем экземпляр класса Env
 env.read_env('D:\data\Ivan\Programming\OxCowsBot\env\.env')  # Методом read_env() читаем файл .env и загружаем из него переменные в окружение
 
