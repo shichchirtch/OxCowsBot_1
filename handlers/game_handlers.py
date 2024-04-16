@@ -264,7 +264,8 @@ async def gaming_with_bot(message: Message):
                 std_out_logger.info(f"{takers[message.from_user.id]['user_name']}  - Выигрыш\n")
                 stroka = (f"{takers[message.from_user.id]['schritt']}  Ход  <b>{temp_res.count('Ox')} "
                           f"{language_dict['more bulls'][takers[userID]['language']]} "
-                          f"  \U0001f402  \U0001f402  \U0001f402  \U0001f402   !!!</b> \n'</b>!!! \n")
+                          f"  \U0001f402  \U0001f402  \U0001f402  \U0001f402   !!!</b>!!! \n")
+
                 takers[message.from_user.id]['wins'] += 1
 
                 pip_print = " ".join(takers[message.from_user.id]["secret_kit"])

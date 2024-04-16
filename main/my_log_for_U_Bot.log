@@ -1,15 +1,16 @@
-[2024-04-16 02:33:36,884] #INFO     comand_handlers.py:24 - STD_out - 
+[2024-04-16 02:46:22,763] #INFO     comand_handlers.py:24 - STD_out - 
 BOT запущен  
 ЮЗЕР -->  Ivan  
-TIME --> Tue Apr 16 02:33:36 2024
+TIME --> Tue Apr 16 02:46:22 2024
 
-[2024-04-16 02:33:42,347] #INFO     game_handlers.py:84 - STD_out - BOTs NUMBER  =  ['5', '0', '8', '2'] 
-[2024-04-16 02:34:18,151] #INFO     game_handlers.py:125 - STD_out - Ivan  zagadal combo   ['7', '5', '3', '0']
-[2024-04-16 02:34:18,302] #INFO     game_handlers.py:140 - STD_out - 
- ********  FIRST BOT attempt [['2', '9', '1', '3']]  for  Ivan  ********
-[2024-04-16 02:34:18,302] #INFO     game_handlers.py:158 - ERR_out - temp_game_arr 1 works
-[2024-04-16 02:34:18,302] #INFO     game_handlers.py:171 - ERR_out - temp_game_arr 2 works
-[2024-04-16 02:34:18,302] #INFO     game_handlers.py:211 - ERR_out - Список Бота - [['7', '5', '3', '0'], ['7', '3', '0', '5'], ['7', '0', '5', '3'], ['4', '6', '7', '0'], ['2', '9', '1', '3'], ['2', '9', '1', '3']]
-[2024-04-16 02:34:24,261] #INFO     game_handlers.py:232 - ERR_out - for Ivan   AttemtCOMBO  =  ['5', '0', '8', '2'] , список комбининаций бота : att = 5,  [['7', '5', '3', '0'], ['7', '3', '0', '5'], ['7', '0', '5', '3'], ['4', '6', '7', '0'], ['2', '9', '1', '3']]
-[2024-04-16 02:34:24,261] #INFO     game_handlers.py:264 - STD_out - Ivan  - Выигрыш
+[2024-04-16 02:46:27,449] #WARNING  game_handlers.py:77 - FILE_LOGGER - Структура словаря takers =  {6685637602: {'user_name': 'Ivan', 'in_game': True, 'secret_kit': ['7', '3', '9', '0'], 'total_games': 0, 'wins': 0, 'game_list': [], 'bot_list': [], 'user_comb': 'setting_data', 'bot_kit': 'empty', 'bot_win': False, 'bot_pobeda': 0, 'language': 0, 'start_time': 482479.437, 'schritt': 0, 'first bot data': None, 'set_SET': 'SET', 'Hold_Level': 'WITH SILLY BOT', 'game_level': 'WITH SILLY BOT', 'inline_user_kit': ''}}
+[2024-04-16 02:46:27,450] #INFO     game_handlers.py:78 - STD_out - BOTs NUMBER  =  ['7', '3', '9', '0'] 
+[2024-04-16 02:46:30,449] #INFO     game_handlers.py:125 - STD_out - Ivan  zagadal combo   ['7', '6', '3', '2']
+[2024-04-16 02:46:30,511] #INFO     game_handlers.py:140 - STD_out - 
+ ********  FIRST BOT attempt [['0', '4', '1', '5']]  for  Ivan  ********
+[2024-04-16 02:46:30,511] #INFO     game_handlers.py:150 - ERR_out - NOT temp_game_arr works
+[2024-04-16 02:46:30,511] #INFO     game_handlers.py:171 - ERR_out - temp_game_arr 2 works
+[2024-04-16 02:46:30,511] #INFO     game_handlers.py:211 - ERR_out - Список Бота - [['7', '6', '3', '2'], ['2', '6', '7', '3'], ['2', '7', '3', '6'], ['2', '3', '6', '7'], ['2', '6', '3', '7'], ['2', '3', '7', '6'], ['2', '7', '6', '3'], ['3', '2', '6', '7'], ['3', '6', '7', '2'], ['3', '7', '2', '6'], ['3', '7', '6', '2'], ['3', '6', '2', '7'], ['3', '2', '7', '6'], ['3', '9', '2', '8'], ['0', '4', '1', '5']]
+[2024-04-16 02:46:46,482] #INFO     game_handlers.py:232 - ERR_out - for Ivan   AttemtCOMBO  =  ['7', '3', '9', '0'] , список комбининаций бота : att = 14,  [['7', '6', '3', '2'], ['2', '6', '7', '3'], ['2', '7', '3', '6'], ['2', '3', '6', '7'], ['2', '6', '3', '7'], ['2', '3', '7', '6'], ['2', '7', '6', '3'], ['3', '2', '6', '7'], ['3', '6', '7', '2'], ['3', '7', '2', '6'], ['3', '7', '6', '2'], ['3', '6', '2', '7'], ['3', '2', '7', '6'], ['3', '9', '2', '8']]
+[2024-04-16 02:46:46,482] #INFO     game_handlers.py:264 - STD_out - Ivan  - Выигрыш
 
